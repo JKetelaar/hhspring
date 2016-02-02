@@ -27,11 +27,17 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private MenuItemRepository menuItemRepository;
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private List<Meal> meals = new ArrayList<>();
     private List<FoodCategory> foodCats = new ArrayList<>();
     private List<Drink> drinks = new ArrayList<>();
     private List<Customer> customers = new ArrayList<>();
+    private List<UserRole> userRoles = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     /**
      * menu items, food categories and customers are common to all restaurants
@@ -73,6 +79,13 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
         createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
         createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
+
+        String ROLE_MANAGER = "ROLE_MANAGER", ROLE_EMPLOYEE = "ROLE_EMPLOYEE", ROLE_CUSTOMER = "ROLE_CUSTOMER";
+
+        UserRole OBJECT_ROLE_MANAGER = createUserRoles(ROLE_MANAGER);
+        UserRole OBJECT_ROLE_EMPLOYEE = createUserRoles(ROLE_EMPLOYEE);
+        UserRole OBJECT_ROLE_CUSTOMER = createUserRoles(ROLE_CUSTOMER);
+        createUser("jketelaar", "auditt01", true, Arrays.asList(OBJECT_ROLE_MANAGER, OBJECT_ROLE_EMPLOYEE));
     }
 
     private void createFoodCategory(String tag) {
@@ -107,6 +120,23 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         Customer customer = new Customer(firstName, lastName, birthDate, partySize, description, photo);
         customers.add(customer);
         customerRepository.save(customer);
+    }
+
+    private UserRole createUserRoles(String role){
+        UserRole userRole = new UserRole(role);
+        userRoles.add(userRole);
+        userRoleRepository.save(userRole);
+
+        return userRole;
+    }
+
+    private void createUser(String username, String password, boolean enabled, List<UserRole> roles){
+        User user = new User(username, password, enabled);
+        for (UserRole role : roles){
+            user.getRoles().add(role);
+        }
+        users.add(user);
+        userRepository.save(user);
     }
 
     private void createDiningTables(int numberOfTables, Restaurant restaurant) {
