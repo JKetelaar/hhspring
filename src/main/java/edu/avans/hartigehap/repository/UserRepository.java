@@ -15,7 +15,7 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
     List<User> findByUsername(String username, boolean includeEnabled);
 
-    List<User> findByUserRole(UserRole userRole);
+    List<User> findByRoles(UserRole userRole);
 
-    List<User> findByUserRole(UserRole userRole, boolean includeEnabled);
+    List<User> findByRoles(UserRole userRole, boolean includeEnabled);
 }

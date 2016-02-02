@@ -10,5 +10,5 @@ import java.util.List;
  * @author JKetelaar
  */
 public interface UserRoleRepository extends PagingAndSortingRepository<UserRole, Long> {
-    List<UserRole> findRoleByName(String name);
+    List<UserRole> findByRole(String name);
 }
