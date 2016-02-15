@@ -11,6 +11,12 @@ import java.util.List;
  */
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
+    /**
+     * Provides a user based on a requested username
+     *
+     * @param username String
+     * @return List of users
+     */
     List<User> findByUsername(String username);
 
     List<User> findByUsername(String username, boolean includeEnabled);

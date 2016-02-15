@@ -1,37 +1,29 @@
 package edu.avans.hartigehap.domain;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.*;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
-
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import java.io.Serializable;
 
 @MappedSuperclass
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
-@ToString(includeFieldNames = true, of = { "id", "version" })
+@ToString(includeFieldNames = true, of = {"id", "version"})
 @NoArgsConstructor
 public abstract class DomainObjectNaturalId implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final int PRIME = 31;
-
-    // natural id (so no auto generation needed)
-    @Id
-    private String id;
-
     @Version
     @Setter(AccessLevel.NONE)
     Long version;
+    // natural id (so no auto generation needed)
+    @Id
+    private String id;
 
     DomainObjectNaturalId(String id) {
         this.id = id;

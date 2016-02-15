@@ -4,7 +4,9 @@ public final class RSConstants {
 
     public static final String URL_PREFIX = "/rest/v1";
 
-    /** defeat instantiation. */
+    /**
+     * defeat instantiation.
+     */
     private RSConstants() {
         // empty
     }

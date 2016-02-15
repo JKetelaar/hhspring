@@ -1,6 +1,5 @@
 package edu.avans.hartigehap.repository;
 
-import edu.avans.hartigehap.domain.User;
 import edu.avans.hartigehap.domain.UserRole;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

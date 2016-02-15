@@ -1,21 +1,18 @@
 package edu.avans.hartigehap.domain;
 
-import java.util.Collection;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.persistence.*;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
- * 
  * @author Erco
  */
 @Entity
@@ -23,7 +20,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
-@ToString(callSuper = true, includeFieldNames = true, of = { "menu", "diningTables", "customers" })
+@ToString(callSuper = true, includeFieldNames = true, of = {"menu", "diningTables", "customers"})
 @NoArgsConstructor
 public class Restaurant extends DomainObjectNaturalId {
     private static final long serialVersionUID = 1L;

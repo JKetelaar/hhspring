@@ -1,30 +1,18 @@
 package edu.avans.hartigehap.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 /**
- * 
  * @author Erco
  */
 @Entity
@@ -36,34 +24,23 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
-@ToString(callSuper = true, includeFieldNames = true, of = { "orderStatus", "orderItems" })
+@ToString(callSuper = true, includeFieldNames = true, of = {"orderStatus", "orderItems"})
 public class Order extends DomainObject {
     private static final long serialVersionUID = 1L;
-
-    public enum OrderStatus {
-        CREATED, SUBMITTED, PLANNED, PREPARED, SERVED
-    }
-
     @Enumerated(EnumType.ORDINAL)
     // represented in database as integer
     private OrderStatus orderStatus;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date submittedTime;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date plannedTime;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date preparedTime;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date servedTime;
-
     // unidirectional one-to-many relationship.
     @OneToMany(cascade = javax.persistence.CascadeType.ALL)
     private Collection<OrderItem> orderItems = new ArrayList<OrderItem>();
-
     @ManyToOne()
     private Bill bill;
 
@@ -71,12 +48,12 @@ public class Order extends DomainObject {
         orderStatus = OrderStatus.CREATED;
     }
 
-    /* business logic */
-
     @Transient
     public boolean isSubmittedOrSuccessiveState() {
         return orderStatus != OrderStatus.CREATED;
     }
+
+    /* business logic */
 
     // transient annotation, because methods starting with are recognized by JPA
     // as properties
@@ -182,6 +159,10 @@ public class Order extends DomainObject {
             price += orderItemIterator.next().getPrice();
         }
         return price;
+    }
+
+    public enum OrderStatus {
+        CREATED, SUBMITTED, PLANNED, PREPARED, SERVED
     }
 
 }

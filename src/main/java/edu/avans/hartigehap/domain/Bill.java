@@ -1,29 +1,18 @@
 package edu.avans.hartigehap.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 /**
- * 
  * @author Erco
  */
 @Entity
@@ -32,35 +21,24 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
-@ToString(callSuper = true, includeFieldNames = true, of = { "billStatus", "currentOrder", "orders" })
+@ToString(callSuper = true, includeFieldNames = true, of = {"billStatus", "currentOrder", "orders"})
 public class Bill extends DomainObject {
     private static final long serialVersionUID = 1L;
-
-    public enum BillStatus {
-        CREATED, SUBMITTED, PAID
-    }
-
     // represented in database as integer
     @Enumerated(EnumType.ORDINAL)
     private BillStatus billStatus;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date submittedTime;
-
     @Temporal(TemporalType.TIMESTAMP)
     private Date paidTime;
-
     // unidirectional one-to-one relationship
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     private Order currentOrder;
-
     @OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "bill")
     private Collection<Order> orders = new ArrayList<Order>();
-
     // bidirectional one-to-many relationship
     @ManyToOne()
     private DiningTable diningTable;
-
     // bidirectional one-to-many relationship
     @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
     private Customer customer;
@@ -71,8 +49,6 @@ public class Bill extends DomainObject {
         currentOrder.setBill(this);
         orders.add(currentOrder);
     }
-
-    /* business logic */
 
     @Transient
     public Collection<Order> getSubmittedOrders() {
@@ -87,10 +63,12 @@ public class Bill extends DomainObject {
         return submittedOrders;
     }
 
+    /* business logic */
+
     /**
      * price of *all* orders, so submitted orders and current (not yet
      * submitted) order
-     * 
+     *
      * @return
      */
     @Transient
@@ -105,7 +83,7 @@ public class Bill extends DomainObject {
 
     /**
      * price of the *submitted or successive state* orders only
-     * 
+     *
      * @return
      */
     @Transient
@@ -178,6 +156,10 @@ public class Bill extends DomainObject {
 
         paidTime = new Date();
         billStatus = BillStatus.PAID;
+    }
+
+    public enum BillStatus {
+        CREATED, SUBMITTED, PAID
     }
 
 }

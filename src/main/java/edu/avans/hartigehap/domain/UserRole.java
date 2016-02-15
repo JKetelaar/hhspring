@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
-@ToString(callSuper = true, includeFieldNames = true, of = { "name" })
+@ToString(callSuper = true, includeFieldNames = true, of = {"name"})
 @NoArgsConstructor
 public class UserRole extends DomainObject {
 

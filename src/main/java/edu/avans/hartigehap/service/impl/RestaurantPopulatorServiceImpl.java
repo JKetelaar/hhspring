@@ -3,7 +3,6 @@ package edu.avans.hartigehap.service.impl;
 import edu.avans.hartigehap.domain.*;
 import edu.avans.hartigehap.repository.*;
 import edu.avans.hartigehap.service.RestaurantPopulatorService;
-
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -57,23 +56,23 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
 
         // create Meals
         createMeal("spaghetti", "spaghetti.jpg", 8, "easy",
-                Arrays.<FoodCategory> asList(foodCats.get(3), foodCats.get(1)));
+                Arrays.<FoodCategory>asList(foodCats.get(3), foodCats.get(1)));
         createMeal("macaroni", "macaroni.jpg", 8, "easy",
-                Arrays.<FoodCategory> asList(foodCats.get(3), foodCats.get(1)));
+                Arrays.<FoodCategory>asList(foodCats.get(3), foodCats.get(1)));
         createMeal("canneloni", "canneloni.jpg", 9, "easy",
-                Arrays.<FoodCategory> asList(foodCats.get(3), foodCats.get(1)));
-        createMeal("pizza", "pizza.jpg", 9, "easy", Arrays.<FoodCategory> asList(foodCats.get(3), foodCats.get(1)));
+                Arrays.<FoodCategory>asList(foodCats.get(3), foodCats.get(1)));
+        createMeal("pizza", "pizza.jpg", 9, "easy", Arrays.<FoodCategory>asList(foodCats.get(3), foodCats.get(1)));
         createMeal("carpaccio", "carpaccio.jpg", 7, "easy",
-                Arrays.<FoodCategory> asList(foodCats.get(3), foodCats.get(0)));
+                Arrays.<FoodCategory>asList(foodCats.get(3), foodCats.get(0)));
         createMeal("ravioli", "ravioli.jpg", 8, "easy",
-                Arrays.<FoodCategory> asList(foodCats.get(3), foodCats.get(1), foodCats.get(2)));
+                Arrays.<FoodCategory>asList(foodCats.get(3), foodCats.get(1), foodCats.get(2)));
 
         // create Drinks
-        createDrink("beer", "beer.jpg", 1, Drink.Size.LARGE, Arrays.<FoodCategory> asList(foodCats.get(5)));
-        createDrink("coffee", "coffee.jpg", 1, Drink.Size.MEDIUM, Arrays.<FoodCategory> asList(foodCats.get(6)));
+        createDrink("beer", "beer.jpg", 1, Drink.Size.LARGE, Arrays.<FoodCategory>asList(foodCats.get(5)));
+        createDrink("coffee", "coffee.jpg", 1, Drink.Size.MEDIUM, Arrays.<FoodCategory>asList(foodCats.get(6)));
 
         // create Customers
-        byte[] photo = new byte[] { 127, -128, 0 };
+        byte[] photo = new byte[]{127, -128, 0};
         createCustomer("peter", "limonade", new DateTime(), 1, "description", photo);
         createCustomer("barry", "batsbak", new DateTime(), 1, "description", photo);
         createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
@@ -95,7 +94,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     }
 
     private void createMeal(String name, String image, int price, String recipe, List<FoodCategory> foodCats) {
-        
+
         Meal meal = new Meal(name, image, price, recipe);
         // as there is no cascading between FoodCategory and MenuItem (both
         // ways), it is important to first
@@ -116,13 +115,13 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     }
 
     private void createCustomer(String firstName, String lastName, DateTime birthDate, int partySize,
-            String description, byte[] photo) {
+                                String description, byte[] photo) {
         Customer customer = new Customer(firstName, lastName, birthDate, partySize, description, photo);
         customers.add(customer);
         customerRepository.save(customer);
     }
 
-    private UserRole createUserRoles(String role){
+    private UserRole createUserRoles(String role) {
         UserRole userRole = new UserRole(role);
         userRoles.add(userRole);
         userRoleRepository.save(userRole);
@@ -130,9 +129,9 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         return userRole;
     }
 
-    private void createUser(String username, String password, boolean enabled, List<UserRole> roles){
+    private void createUser(String username, String password, boolean enabled, List<UserRole> roles) {
         User user = new User(username, password, enabled);
-        for (UserRole role : roles){
+        for (UserRole role : roles) {
             user.getRoles().add(role);
         }
         users.add(user);
