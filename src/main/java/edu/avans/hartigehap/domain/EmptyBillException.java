@@ -7,9 +7,8 @@ public class EmptyBillException extends Exception {
     /**
      * Constructs an instance of <code>EmptyBillException</code> with the
      * specified detail message.
-     * 
-     * @param msg
-     *            the detail message.
+     *
+     * @param msg the detail message.
      */
     public EmptyBillException(String msg) {
         super(msg);

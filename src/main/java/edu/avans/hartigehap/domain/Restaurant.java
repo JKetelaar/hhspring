@@ -1,5 +1,7 @@
 package edu.avans.hartigehap.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.Iterator;

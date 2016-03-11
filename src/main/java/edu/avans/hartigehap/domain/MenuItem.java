@@ -1,5 +1,7 @@
 package edu.avans.hartigehap.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -35,7 +37,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Setter
 @ToString(callSuper = true, includeFieldNames = true, of = {})
 @NoArgsConstructor
-public abstract class MenuItem extends MenuComponent {
+public abstract class MenuItem extends DomainObjectNaturalId {
     private static final long serialVersionUID = 1L;
 
     // image stored in the database
@@ -59,7 +61,7 @@ public abstract class MenuItem extends MenuComponent {
     private Collection<FoodCategory> foodCategories = new ArrayList<FoodCategory>();
 
     public MenuItem(String id, String imageFileName, int price) {
-        super.setId(id);
+        super(id);
         this.imageFileName = imageFileName;
         this.price = price;
 
