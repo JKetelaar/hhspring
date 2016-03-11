@@ -39,7 +39,6 @@ public class OrderItem extends DomainObject {
     }
 
     /* business logic */
-
     public void incrementQuantity() {
         this.quantity++;
     }
@@ -47,6 +46,10 @@ public class OrderItem extends DomainObject {
     public void decrementQuantity() {
         assert quantity > 0 : "quantity cannot be below 0";
         this.quantity--;
+    }
+
+    public String description() {
+        return menuItem.getId() + " (" + quantity + "x)";
     }
 
     @Transient

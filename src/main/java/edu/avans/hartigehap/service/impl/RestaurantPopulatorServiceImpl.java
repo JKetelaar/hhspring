@@ -31,6 +31,8 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private UserRoleRepository userRoleRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private MenuComponentRepository menuComponentRepository;
 
     private List<Meal> meals = new ArrayList<>();
     private List<FoodCategory> foodCats = new ArrayList<>();
@@ -38,6 +40,28 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private List<Customer> customers = new ArrayList<>();
     private List<UserRole> userRoles = new ArrayList<>();
     private List<User> users = new ArrayList<>();
+
+    private void createPredefinedMenu(){
+        MenuComponent allMenus = new PredefinedMenu("Alle menu's", "Alle menu's");
+        MenuComponent pancakeMenu = new PredefinedMenu("Pancake menu", "Great pancakes for breakfast");
+
+        MenuItem panecakeItem = new Meal("Pancake", "NietTeVinden.png", 3, "easy");
+        MenuItem sugerItem = new Meal("Suiker", "OokNietTeVinden.png", 1, "easy");
+        MenuItem testItem = new Meal("Test", "WatIsTest.wav", 1, "easy");
+        MenuItem testTweeItem = new Meal("TestTwee", "WatIsTestTwee.wav", 1, "easy");
+        MenuItem cokeItem = new Drink("Cola", "WaarIsDeze.jpg", 2, Drink.Size.LARGE);
+
+        sugerItem.add(testItem);
+        sugerItem.add(testTweeItem);
+
+        panecakeItem.add(sugerItem);
+        pancakeMenu.add(cokeItem);
+        pancakeMenu.add(panecakeItem);
+
+        allMenus.add(pancakeMenu);
+
+        menuComponentRepository.save(allMenus);
+    }
 
     /**
      * menu items, food categories and customers are common to all restaurants

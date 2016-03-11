@@ -2,6 +2,7 @@ package edu.avans.hartigehap.domain;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -34,7 +35,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Setter
 @ToString(callSuper = true, includeFieldNames = true, of = {})
 @NoArgsConstructor
-public abstract class MenuItem extends DomainObjectNaturalId {
+public abstract class MenuItem extends MenuComponent {
     private static final long serialVersionUID = 1L;
 
     // image stored in the database
@@ -51,12 +52,14 @@ public abstract class MenuItem extends DomainObjectNaturalId {
     // caps "price"
     private int price;
 
+    private ArrayList<MenuComponent> menuComponents = new ArrayList<>();
+
     // no cascade
     @ManyToMany
     private Collection<FoodCategory> foodCategories = new ArrayList<FoodCategory>();
 
     public MenuItem(String id, String imageFileName, int price) {
-        super(id);
+        super.setId(id);
         this.imageFileName = imageFileName;
         this.price = price;
 
@@ -66,6 +69,31 @@ public abstract class MenuItem extends DomainObjectNaturalId {
         setFoodCategories(foodCategories);
         for (FoodCategory foodCategory : foodCategories) {
             foodCategory.getMenuItems().add(this);
+        }
+    }
+
+    @Override
+    public void add(MenuComponent menuComponent) {
+        menuComponents.add(menuComponent);
+    }
+
+    @Override
+    public void remove(MenuComponent menuComponent) {
+        menuComponents.remove(menuComponent);
+    }
+
+    @Override
+    public void print(int depth) {
+        System.out.println(getId());
+        System.out.println("---------------------");
+
+        Iterator iterator = menuComponents.iterator();
+        while(iterator.hasNext()){
+            for (int i = 0; i < depth; i++) {
+                System.out.print("\t");
+            }
+            MenuComponent menuComponent = (MenuComponent)iterator.next();
+            menuComponent.print(depth + 1);
         }
     }
 
