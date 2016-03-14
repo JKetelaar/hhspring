@@ -50,13 +50,6 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         MenuItem testTweeItem = new Meal("TestTwee", "WatIsTestTwee.wav", 1, "easy");
         MenuItem cokeItem = new Drink("Cola", "WaarIsDeze.jpg", 2, Drink.Size.LARGE);
 
-        sugerItem.add(testItem);
-        sugerItem.add(testTweeItem);
-
-        panecakeItem.add(sugerItem);
-        pancakeMenu.add(cokeItem);
-        pancakeMenu.add(panecakeItem);
-
         allMenus.add(pancakeMenu);
 
         menuComponentRepository.save(allMenus);
