@@ -1,0 +1,6 @@
+language: java
+jdk:
+  - oracle jdk7
+script: 
+  - mvn test
+  - mvn -U package
