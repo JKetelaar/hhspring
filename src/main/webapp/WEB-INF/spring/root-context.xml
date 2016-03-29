@@ -8,7 +8,10 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
     <import resource="classpath:datasource-tx-jpa.xml" />
-	<import resource="security-context.xml"/>     	        
+	<import resource="security-context.xml"/>
+
+	<!-- Makes sure the aop.xml files gets found by Spring-->
+	<import resource="classpath:aop.xml" />
     
     <context:component-scan base-package="edu.avans.hartigehap.service.impl" />    
  		

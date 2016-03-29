@@ -2,6 +2,7 @@ package edu.avans.hartigehap.service.impl;
 
 import java.util.*;
 
+import edu.avans.hartigehap.aop.MyExecutionTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
@@ -50,7 +51,8 @@ public class RestaurantServiceImpl implements RestaurantService {
      * to be able to follow associations outside the context of a transaction,
      * prefetch the associated entities by traversing the associations
      */
-    @Transactional(readOnly = true)
+    @MyExecutionTime
+    @Transactional(readOnly=true)
     public Restaurant fetchWarmedUp(String restaurantName) {
         Restaurant restaurant = restaurantRepository.findOne(restaurantName);
         restaurant.warmup();
