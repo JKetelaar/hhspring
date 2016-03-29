@@ -1,4 +1,0 @@
-<configuration>
-        <tomcatHttpPort>80</tomcatHttpPort>
-        <url>http://hartigehap.spring.ketelaar.me/manager</url>
-</configuration>
