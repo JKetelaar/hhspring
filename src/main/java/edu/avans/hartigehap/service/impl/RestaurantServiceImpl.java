@@ -1,15 +1,12 @@
 package edu.avans.hartigehap.service.impl;
 
-<<<<<<< HEAD
 import java.util.*;
 
 import edu.avans.hartigehap.aop.MyExecutionTime;
-=======
 import com.google.common.collect.Lists;
 import edu.avans.hartigehap.domain.Restaurant;
 import edu.avans.hartigehap.repository.RestaurantRepository;
 import edu.avans.hartigehap.service.RestaurantService;
->>>>>>> 07063eea091ba70d55593d7cc07f588a15894035
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
