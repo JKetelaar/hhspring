@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Setter
 @ToString(callSuper = true, includeFieldNames = true, of = {})
 @NoArgsConstructor
-public abstract class MenuItem extends DomainObjectNaturalId {
+public abstract class MenuItem extends MenuComponent {
     private static final long serialVersionUID = 1L;
 
     // image stored in the database
@@ -61,7 +61,7 @@ public abstract class MenuItem extends DomainObjectNaturalId {
     private Collection<FoodCategory> foodCategories = new ArrayList<FoodCategory>();
 
     public MenuItem(String id, String imageFileName, int price) {
-        super(id);
+        super.setId(id);
         this.imageFileName = imageFileName;
         this.price = price;
 
