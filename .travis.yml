@@ -1,6 +1,8 @@
 language: java
 jdk:
   - oraclejdk8
+services:
+  - mysql
 before_script:
   - ./.travis/.initialize.db.sh;
 script: 
