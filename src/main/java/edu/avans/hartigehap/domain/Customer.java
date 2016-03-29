@@ -1,36 +1,24 @@
 package edu.avans.hartigehap.domain;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.Size;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 /**
- * 
  * @author Erco
  */
 @Entity
@@ -38,7 +26,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
-@ToString(callSuper = true, includeFieldNames = true, of = { "firstName", "lastName", "bills" })
+@ToString(callSuper = true, includeFieldNames = true, of = {"firstName", "lastName", "bills"})
 @NoArgsConstructor
 public class Customer extends DomainObject {
     private static final long serialVersionUID = 1L;
@@ -80,7 +68,7 @@ public class Customer extends DomainObject {
 
     // TODO not complete (bills)
     public Customer(String firstName, String lastName, DateTime birthDate, int partySize, String description,
-            byte[] photo) {
+                    byte[] photo) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -104,7 +92,7 @@ public class Customer extends DomainObject {
         // result is that changing only one field of a customer effectively deletes the photo
         // hack: only update the photo when a new photo is passed
         // downside of this hack: it is not possible any more to delete the photo
-        if(customer.photo.length != 0) {
+        if (customer.photo.length != 0) {
             photo = customer.photo;
         }
         partySize = customer.partySize;

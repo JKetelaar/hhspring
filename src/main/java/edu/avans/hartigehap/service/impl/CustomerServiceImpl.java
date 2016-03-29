@@ -1,10 +1,10 @@
 package edu.avans.hartigehap.service.impl;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Iterator;
-import java.util.Collection;
+import com.google.common.collect.Lists;
+import edu.avans.hartigehap.domain.Customer;
+import edu.avans.hartigehap.domain.Restaurant;
+import edu.avans.hartigehap.repository.CustomerRepository;
+import edu.avans.hartigehap.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,11 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import edu.avans.hartigehap.domain.*;
-import edu.avans.hartigehap.repository.*;
-import edu.avans.hartigehap.service.*;
 
-import com.google.common.collect.Lists;
+import java.util.*;
 
 @Service("customerService")
 @Repository
@@ -55,7 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         // a query created using a repository method name
         List<Customer> customersForRestaurants = customerRepository.findByRestaurants(
-                Arrays.asList(new Restaurant[] { restaurant }), new Sort(Sort.Direction.ASC, "lastName"));
+                Arrays.asList(new Restaurant[]{restaurant}), new Sort(Sort.Direction.ASC, "lastName"));
 
         log.info("findCustomersForRestaurant using query created using repository method name");
         ListIterator<Customer> it = customersForRestaurants.listIterator();
@@ -76,7 +73,7 @@ public class CustomerServiceImpl implements CustomerService {
     public Page<Customer> findCustomersForRestaurantByPage(Restaurant restaurant, Pageable pageable) {
         // a query created using a repository method name
         Page<Customer> customersForRestaurants = customerRepository
-                .findByRestaurants((Collection<Restaurant>) Arrays.asList(new Restaurant[] { restaurant }), pageable);
+                .findByRestaurants((Collection<Restaurant>) Arrays.asList(new Restaurant[]{restaurant}), pageable);
 
         log.info("findCustomersForRestaurant using query created using repository method name");
         Iterator<Customer> it = customersForRestaurants.iterator();

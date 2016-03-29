@@ -1,7 +1,6 @@
 package edu.avans.hartigehap.domain;
 
 /**
- *
  * @author Erco
  */
 public class StateException extends Exception {
