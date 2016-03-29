@@ -4,7 +4,7 @@ jdk:
 services:
   - mysql
 before_script:
-  - chmod +x ./.initialize.db.sh
+  - chmod +x ./.travis/.initialize.db.sh
   - ./.travis/.initialize.db.sh
 script: 
   - mvn test
