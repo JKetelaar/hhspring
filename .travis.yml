@@ -1,6 +1,8 @@
 language: java
 jdk:
   - oraclejdk8
+before_script:
+  - ./.travis/.initialize.db.sh;
 script: 
   - mvn test
   - mvn -U package
