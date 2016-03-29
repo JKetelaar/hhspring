@@ -441,7 +441,7 @@
         <artifactId>maven-t7-plugin</artifactId>
         <version>0.9.16</version>
         <configuration>
-          <tomcatHttpPort>8080</tomcatHttpPort>
+          <tomcatHttpPort>80</tomcatHttpPort>
           <tomcatSetAwait>false</tomcatSetAwait>
         </configuration>
         <executions>
