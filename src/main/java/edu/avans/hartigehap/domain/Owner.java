@@ -29,9 +29,7 @@ import java.util.List;
     @Setter
     //generatie van toString() door Lombok
     @ToString(callSuper=true, includeFieldNames=true, of= {"name"})
-
     public class Owner extends DomainObject{
-
     private static final long serialVersionUID = 1L;
     //als override van de default
     @Column(name = "Name")

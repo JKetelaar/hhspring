@@ -28,7 +28,7 @@ import java.util.List;
 @Service("ownerService")
 //zorgt ervoor dat de klasse als een repository functioneert
 @Repository
-//alle service moethodes worden als een transactie uitgevoerd
+//alle service methodes worden als een transactie uitgevoerd
 @Transactional
 public class OwnerServiceImpl implements OwnerService {
 

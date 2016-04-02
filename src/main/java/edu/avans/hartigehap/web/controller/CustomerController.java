@@ -78,6 +78,8 @@ public class CustomerController {
         return "hartigehap/editcustomer";
     }
 
+    //Autorisatie
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/restaurants/{restaurantName}/customers", params = "form", method = RequestMethod.GET)
     public String createCustomerForm(@PathVariable("restaurantName") String restaurantName, Model uiModel) {
 

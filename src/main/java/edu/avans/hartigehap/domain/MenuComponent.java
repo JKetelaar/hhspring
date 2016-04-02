@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 /*
 MenuComponent represents the interface for
-both MenuItemComposite and MenuComposite. This method is abstract because
+both MenuItem and PredifinedMenu. This method is abstract because
 we want to provide default implementations for these methods
 */
 public abstract class MenuComponent extends DomainObjectNaturalId {

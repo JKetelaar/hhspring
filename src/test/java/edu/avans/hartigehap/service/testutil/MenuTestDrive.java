@@ -23,6 +23,8 @@ public class MenuTestDrive {
         MenuItem cokeItem = new Drink("Cola", "WaarIsDeze.jpg", 2, Drink.Size.LARGE);
         MenuItem francefrice = new Meal("France frice", "hoi.png", 1, "hard");
 
+
+        cheese.add(cheddarCheese);
         cheese.add(cheddarCheese);
         cheese.add(americanCheese);
 
