@@ -19,10 +19,15 @@ import javax.persistence.Entity;
 @Setter
 @ToString(callSuper = true, includeFieldNames = true, of = {})
 @NoArgsConstructor
-public class Condiment extends DecoratedDrink {
+public class Condiment extends MenuItemDecorator {
     private static final long serialVersionUID = 1L;
 
-    public Condiment(Drink drink, String id, String imageFileName, int price, Size size) {
-        super(drink, id, imageFileName, price, size);
+    public Condiment(Drink drink, String id, String imageFileName, int price) {
+        super(drink, id, imageFileName, price);
+    }
+
+    @Override
+    public int getPrice() {
+        return super.extraPrice + getDrink().getPrice();
     }
 }

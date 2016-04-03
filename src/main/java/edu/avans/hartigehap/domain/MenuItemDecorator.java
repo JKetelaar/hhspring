@@ -20,22 +20,20 @@ import javax.persistence.OneToOne;
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true, includeFieldNames = true)
-public abstract class DrinkDecorator extends Drink {
+public abstract class MenuItemDecorator extends MenuItem {
     private static final long serialVersionUID = 1L;
 
     // unidirectional one-to-one and no cascading
     @OneToOne
     private Drink drink;
 
-    private int price;
+    protected int extraPrice;
 
-    public DrinkDecorator(Drink drink, String id, String imageFileName, int price, Size size) {
-        super(id, imageFileName, price, size);
+    public MenuItemDecorator(Drink drink, String id, String imageFileName, int price) {
+        super(id, imageFileName, drink.getPrice());
         this.drink = drink;
     }
 
     @Override
-    public int getPrice() {
-        return this.price + super.getPrice();
-    }
+    public abstract int getPrice();
 }
