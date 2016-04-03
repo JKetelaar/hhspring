@@ -8,7 +8,6 @@ before_script:
   - ./.travis/initialize.db.sh
 script: 
   - mvn test
-  - mvn -U package
 notifications:
   slack: ivh11b4a:3wk2xOsXW1eab9RpRk2JJbyp
 cache:
