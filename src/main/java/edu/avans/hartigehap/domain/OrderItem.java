@@ -36,7 +36,6 @@ public class OrderItem extends DomainObject {
         this.quantity = quantity;
     }
 
-    /* business logic */
     public void incrementQuantity() {
         this.quantity++;
     }

@@ -60,8 +60,6 @@ public class DiningTable extends DomainObject {
         bills.add(currentBill);
     }
 
-    /* business logic */
-
     public void warmup() {
         Iterator<OrderItem> orderItemIterator = currentBill.getCurrentOrder().getOrderItems().iterator();
         while (orderItemIterator.hasNext()) {

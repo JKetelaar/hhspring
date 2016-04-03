@@ -53,8 +53,6 @@ public class Order extends DomainObject {
         return orderStatus != OrderStatus.CREATED;
     }
 
-    /* business logic */
-
     // transient annotation, because methods starting with are recognized by JPA
     // as properties
     @Transient

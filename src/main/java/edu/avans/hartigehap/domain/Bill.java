@@ -24,21 +24,28 @@ import java.util.Iterator;
 @ToString(callSuper = true, includeFieldNames = true, of = {"billStatus", "currentOrder", "orders"})
 public class Bill extends DomainObject {
     private static final long serialVersionUID = 1L;
+
     // represented in database as integer
     @Enumerated(EnumType.ORDINAL)
     private BillStatus billStatus;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date submittedTime;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date paidTime;
+
     // unidirectional one-to-one relationship
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     private Order currentOrder;
+
     @OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "bill")
     private Collection<Order> orders = new ArrayList<Order>();
+
     // bidirectional one-to-many relationship
     @ManyToOne()
     private DiningTable diningTable;
+
     // bidirectional one-to-many relationship
     @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
     private Customer customer;
@@ -62,8 +69,6 @@ public class Bill extends DomainObject {
         }
         return submittedOrders;
     }
-
-    /* business logic */
 
     /**
      * price of *all* orders, so submitted orders and current (not yet
