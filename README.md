@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/JKetelaar/hhspring.svg?token=sFfyKhxt85PJ2CsHhDsi&branch=master)](https://travis-ci.com/JKetelaar/hhspring)
+
 # README #
 
 Deze Hartige Hap webapplicatie is gemaakt met het Spring MVC framework.
