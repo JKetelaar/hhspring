@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
@@ -37,13 +38,10 @@ public class MenuItemServiceTest extends AbstractTransactionRollbackTest {
         FoodCategory drinkCategory = foodCategoryRepository.findByTag("energizing drinks");
 
         for (MenuItem menuItem : menuItemRepository.findAll()){
-            for(FoodCategory foodCategory : menuItem.getFoodCategories()){
-                if (foodCategory.getTag().equals(drinkCategory.getTag())){
-                    menuItems.add(menuItem);
-                }
-            }
+            menuItems.addAll(menuItem.getFoodCategories().stream().filter(foodCategory -> foodCategory.getTag().equals(drinkCategory.getTag())).map(foodCategory -> menuItem).collect(Collectors.toList()));
         }
 
         assertEquals(menuItems.size(), 2);
+        assertEquals(menuItems.get(1).getPrice(), menuItems.get(0).getPrice() + 1);
     }
 }
