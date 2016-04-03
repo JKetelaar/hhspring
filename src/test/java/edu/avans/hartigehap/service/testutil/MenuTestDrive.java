@@ -2,6 +2,8 @@ package edu.avans.hartigehap.service.testutil;
 
 import edu.avans.hartigehap.domain.*;
 
+import java.util.Arrays;
+
 /**
  * @author thom145
  */

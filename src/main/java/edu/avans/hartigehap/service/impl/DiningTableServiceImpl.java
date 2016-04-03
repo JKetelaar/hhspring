@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Service("diningTableService")
@@ -67,6 +68,8 @@ public class DiningTableServiceImpl implements DiningTableService {
 
         diningTable.warmup();
 
+        menuItemWarmup();
+
         return diningTable;
     }
 
@@ -89,5 +92,13 @@ public class DiningTableServiceImpl implements DiningTableService {
 
     public void submitBill(DiningTable diningTable) throws StateException, EmptyBillException {
         diningTable.submitBill();
+    }
+
+    private void menuItemWarmup(){
+        Iterator<MenuItem> menuItemIterator = menuItemRepository.findAll().iterator();
+        while(menuItemIterator.hasNext()){
+            MenuItem menuItem = menuItemIterator.next();
+            log.debug(menuItem.getId());
+        }
     }
 }

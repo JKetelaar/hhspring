@@ -6,12 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Erco
@@ -50,7 +48,6 @@ public abstract class MenuItem extends MenuComponent {
         super.setId(id);
         this.imageFileName = imageFileName;
         this.price = price;
-
     }
 
     public void addFoodCategories(Collection<FoodCategory> foodCategories) {
@@ -81,6 +78,4 @@ public abstract class MenuItem extends MenuComponent {
             menuComponent.print(depth + 1);
         }
     }
-
-    /* business logic */
 }
