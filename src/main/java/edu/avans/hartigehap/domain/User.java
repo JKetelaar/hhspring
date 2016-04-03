@@ -41,6 +41,7 @@ public class User extends DomainObject {
     private boolean enabled;
 
     @ElementCollection(fetch = FetchType.EAGER)
+    @Column(name = "USER_PROPERTIES")
     private Map<String, String> properties = new HashMap<>();
 
     @ManyToMany
