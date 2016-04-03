@@ -1,11 +1,13 @@
 package edu.avans.hartigehap.web.it;
 
-import java.util.concurrent.TimeUnit;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.openqa.selenium.*;
+
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 @Slf4j
 public class HomePageLoginIT {

@@ -6,7 +6,9 @@ public final class TestConstants {
     public static final String SPRING_ROOT_CONTEXT = "/root-context.xml";
     public static final String TX_MANAGER_NAME = "transactionManager";
 
-    /** defeat instantiation. */
+    /**
+     * defeat instantiation.
+     */
     private TestConstants() {
         // empty
     }

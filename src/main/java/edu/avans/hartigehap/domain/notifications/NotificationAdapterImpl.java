@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Contains a magnificent caching system
+ *
  * @author JKetelaar
  */
 public class NotificationAdapterImpl extends NotificationAdapter {
@@ -22,6 +24,15 @@ public class NotificationAdapterImpl extends NotificationAdapter {
         this.user = user;
     }
 
+    /**
+     * Sending the message with just a message, as the constructor already contains the user, which is the receiver
+     *
+     * @param message Message to be sent
+     *
+     * @return True if sent correctly, false if not
+     *
+     * @throws Exception Could throw an exception for some notification adapter implementations
+     */
     public boolean send(String message) throws Exception {
         return user.getType() != null && send(user.getType() == Type.EMAIL ? user.getEmail() : user.getPhone(), message);
     }
@@ -36,12 +47,22 @@ public class NotificationAdapterImpl extends NotificationAdapter {
         return false;
     }
 
+    /**
+     * Filling the notification cache
+     */
     public final void fillNotificationAdapterCache() {
         if (notificationAdapterCache.size() <= 0) {
             notificationAdapterCache.put(Type.EMAIL, new EmailNotification());
         }
     }
 
+    /**
+     * Custom option to apply extra notification adapters, from the outside!
+     * Also allows you to override the basic ones
+     *
+     * @param type Type of the notification adapter
+     * @param notificationAdapter The adapter to be added
+     */
     public void setNotificationAdapterCacheValue(Type type, NotificationAdapter notificationAdapter) {
         notificationAdapterCache.put(type, notificationAdapter);
     }

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service("restaurantPopulatorService")
@@ -40,15 +41,15 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private List<UserRole> userRoles = new ArrayList<>();
     private List<User> users = new ArrayList<>();
 
-    private void createPredefinedMenu(){
+    private void createPredefinedMenu() {
         PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", "Great pancakes for breakfast");
         pancakeMenu = menuComponentRepository.save(pancakeMenu);
 
-        MenuItem pancakeItem = new Meal("Pancake", "NietTeVinden.png", 3, "easy");
+        MenuItem pancakeItem = new Meal("Pancake", "pancake.jpg", 3, "easy");
         pancakeItem = menuComponentRepository.save(pancakeItem);
         pancakeItem.setParent(pancakeMenu);
 
-        MenuItem colaItem = new Drink("Cola", "cola.png", 3, Drink.Size.MEDIUM);
+        MenuItem colaItem = new Drink("Cola", "cola.jpg", 3, Drink.Size.MEDIUM);
         colaItem = menuComponentRepository.save(colaItem);
         colaItem.setParent(pancakeMenu);
 
@@ -86,9 +87,9 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
                 Arrays.<FoodCategory>asList(foodCats.get(3), foodCats.get(1), foodCats.get(2)));
 
         // create Drinks
-        createDrink("beer", "beer.jpg", 1, Drink.Size.LARGE, Arrays.<FoodCategory>asList(foodCats.get(5)));
-        createDrink("coffee", "coffee.jpg", 1, Drink.Size.MEDIUM, Arrays.<FoodCategory>asList(foodCats.get(6)));
-        createCondimentedDrink("Coffee with sugar", "coffee.jpg", 1, drinks.get(1));
+        createDrink("beer", "beer.jpg", 1, Drink.Size.LARGE, Collections.singletonList(foodCats.get(5)));
+        createDrink("coffee", "coffee.jpg", 1, Drink.Size.MEDIUM, Collections.singletonList(foodCats.get(6)));
+        createCondimentedDrink("Coffee with sugar", "coffee-with-sugar.jpg", 1, drinks.get(1));
 
         // create Customers
         byte[] photo = new byte[]{127, -128, 0};
@@ -96,15 +97,19 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         createCustomer("barry", "batsbak", new DateTime(), 1, "description", photo);
         createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
 
+        // These naming conventions are on purpose
         String ROLE_MANAGER = "ROLE_MANAGER", ROLE_EMPLOYEE = "ROLE_EMPLOYEE", ROLE_CUSTOMER = "ROLE_CUSTOMER";
 
+        // Creating roles
         UserRole OBJECT_ROLE_MANAGER = createUserRoles(ROLE_MANAGER);
         UserRole OBJECT_ROLE_EMPLOYEE = createUserRoles(ROLE_EMPLOYEE);
         UserRole OBJECT_ROLE_CUSTOMER = createUserRoles(ROLE_CUSTOMER);
 
+        // Creating users and assigning with notification system
         createUser("jketelaar", "auditt01", true, Arrays.asList(OBJECT_ROLE_MANAGER, OBJECT_ROLE_EMPLOYEE));
         assignUserWithEmail("jeroenketelaar@me.com", users.get(0));
 
+        // Creating the predefined menus
         createPredefinedMenu();
     }
 
@@ -135,7 +140,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         drinks.add(drink);
     }
 
-    private void createCondimentedDrink(String name, String image, int price, Drink drink){
+    private void createCondimentedDrink(String name, String image, int price, Drink drink) {
         MenuItemDecorator condimentDrink = new Condiment(drink, name, image, price);
         condimentDrink = menuItemRepository.save(condimentDrink);
         drink.add(condimentDrink);
@@ -167,7 +172,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         users.add(user);
     }
 
-    private void assignUserWithEmail(String email, User user){
+    private void assignUserWithEmail(String email, User user) {
         user.setType(NotificationAdapter.Type.EMAIL);
         user.setEmail(email);
 

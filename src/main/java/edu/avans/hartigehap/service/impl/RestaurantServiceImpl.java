@@ -1,9 +1,7 @@
 package edu.avans.hartigehap.service.impl;
 
-import java.util.*;
-
-import edu.avans.hartigehap.aop.MyExecutionTime;
 import com.google.common.collect.Lists;
+import edu.avans.hartigehap.aop.MyExecutionTime;
 import edu.avans.hartigehap.domain.Restaurant;
 import edu.avans.hartigehap.repository.RestaurantRepository;
 import edu.avans.hartigehap.service.RestaurantService;
@@ -56,7 +54,7 @@ public class RestaurantServiceImpl implements RestaurantService {
      * prefetch the associated entities by traversing the associations
      */
     @MyExecutionTime
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public Restaurant fetchWarmedUp(String restaurantName) {
         Restaurant restaurant = restaurantRepository.findOne(restaurantName);
         restaurant.warmup();

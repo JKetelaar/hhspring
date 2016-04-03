@@ -1,9 +1,7 @@
 package edu.avans.hartigehap.service;
 
 import edu.avans.hartigehap.domain.FoodCategory;
-import edu.avans.hartigehap.domain.Menu;
 import edu.avans.hartigehap.domain.MenuItem;
-import edu.avans.hartigehap.domain.Restaurant;
 import edu.avans.hartigehap.repository.FoodCategoryRepository;
 import edu.avans.hartigehap.repository.MenuItemRepository;
 import edu.avans.hartigehap.service.testutil.AbstractTransactionRollbackTest;
@@ -37,7 +35,7 @@ public class MenuItemServiceTest extends AbstractTransactionRollbackTest {
         List<MenuItem> menuItems = new ArrayList<>();
         FoodCategory drinkCategory = foodCategoryRepository.findByTag("energizing drinks");
 
-        for (MenuItem menuItem : menuItemRepository.findAll()){
+        for (MenuItem menuItem : menuItemRepository.findAll()) {
             menuItems.addAll(menuItem.getFoodCategories().stream().filter(foodCategory -> foodCategory.getTag().equals(drinkCategory.getTag())).map(foodCategory -> menuItem).collect(Collectors.toList()));
         }
 

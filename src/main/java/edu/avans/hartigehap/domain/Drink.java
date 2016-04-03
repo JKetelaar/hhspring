@@ -8,8 +8,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")

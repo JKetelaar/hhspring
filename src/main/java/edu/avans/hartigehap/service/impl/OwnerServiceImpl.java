@@ -3,8 +3,8 @@ package edu.avans.hartigehap.service.impl;
 import com.google.common.collect.Lists;
 import edu.avans.hartigehap.domain.Owner;
 import edu.avans.hartigehap.domain.Restaurant;
-import edu.avans.hartigehap.service.OwnerService;
 import edu.avans.hartigehap.repository.OwnerRepository;
+import edu.avans.hartigehap.service.OwnerService;
 import edu.avans.hartigehap.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,6 +33,8 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Autowired
     private RestaurantService restaurantService;
+    @Autowired
+    private OwnerRepository ownerRepository;
 
     @Override
     public List<Owner> findAll() {
@@ -59,9 +60,6 @@ public class OwnerServiceImpl implements OwnerService {
     public void delete(Owner owner) {
         ownerRepository.delete(owner);
     }
-
-    @Autowired
-    private OwnerRepository ownerRepository;
 
     public List<Owner> findByRestaurant(String restaurantId) {
         Restaurant restaurant = restaurantService.findById(restaurantId);

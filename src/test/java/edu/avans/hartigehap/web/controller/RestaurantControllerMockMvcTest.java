@@ -1,18 +1,8 @@
 package edu.avans.hartigehap.web.controller;
 
-import static org.hamcrest.Matchers.hasItems;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
-import java.util.LinkedList;
-import java.util.List;
-
+import edu.avans.hartigehap.domain.Restaurant;
+import edu.avans.hartigehap.service.RestaurantService;
 import lombok.extern.slf4j.Slf4j;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,13 +18,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import edu.avans.hartigehap.domain.Restaurant;
-import edu.avans.hartigehap.service.RestaurantService;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.hamcrest.Matchers.hasItems;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { RestaurantControllerMockMvcTest.class })
+@ContextConfiguration(classes = {RestaurantControllerMockMvcTest.class})
 @WebAppConfiguration
-@ImportResource({ "classpath:/test-root-context.xml", "classpath:*servlet-context.xml" })
+@ImportResource({"classpath:/test-root-context.xml", "classpath:*servlet-context.xml"})
 @Slf4j
 public class RestaurantControllerMockMvcTest {
 
@@ -76,7 +72,7 @@ public class RestaurantControllerMockMvcTest {
      * <li>autowiring of RestaurantController.</li>
      * <li>autowiring of RestaurantService mock.</li>
      * </ul>
-     * 
+     *
      * @throws Exception
      */
     @Test
@@ -96,7 +92,7 @@ public class RestaurantControllerMockMvcTest {
      * <li>@RequestMapping annotation.</li>
      * <li>view resolving: the correct view name is returned.</li>
      * </ul>
-     * 
+     *
      * @throws Exception
      */
     @Test
@@ -105,7 +101,7 @@ public class RestaurantControllerMockMvcTest {
         Mockito.when(restaurantServiceMock.findAll()).thenReturn(restaurants);
         mockMvc.perform(get("/restaurants")).andExpect(status().isOk())
                 .andExpect(view().name("hartigehap/listrestaurants"))
-                .andExpect(model().attribute("restaurants", hasItems(restaurants.toArray(new Restaurant[] {}))));
+                .andExpect(model().attribute("restaurants", hasItems(restaurants.toArray(new Restaurant[]{}))));
     }
 
     private List<Restaurant> getRestaurants() {

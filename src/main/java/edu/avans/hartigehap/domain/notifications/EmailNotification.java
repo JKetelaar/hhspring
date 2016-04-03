@@ -17,11 +17,12 @@ public class EmailNotification extends NotificationAdapter {
     private static final String username = "ivh11b4@gmail.com";
     private static final String password = "myawesomepassword";
     private static final Properties properties = new Properties();
-
+    private static EmailNotification instance;
     private Session session;
 
-    private static EmailNotification instance;
-
+    /**
+     * Constructing the email notification
+     */
     public EmailNotification() {
         super(Type.EMAIL);
 
@@ -31,6 +32,34 @@ public class EmailNotification extends NotificationAdapter {
         properties.put("mail.smtp.port", "587");
 
         instance = this;
+    }
+
+    private static EmailNotification getInstance() {
+        return instance == null ? instance = new EmailNotification() : instance;
+    }
+
+    /**
+     * TODO: Well it might be inefficient to make #getSession also static, as you could call this from the instance too
+     *
+     * @return Saved session
+     */
+    public static Session getSession() {
+        return getInstance().session == null ? getInstance().session = createSession() : getInstance().session;
+    }
+
+    /**
+     * Creates the session for GMail, should only be called once, or if session is over
+     *
+     * @return Session
+     */
+    private static Session createSession() {
+        return Session.getInstance(getInstance().properties,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                }
+        );
     }
 
     @Override
@@ -50,34 +79,6 @@ public class EmailNotification extends NotificationAdapter {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private static EmailNotification getInstance(){
-        return instance == null ? instance = new EmailNotification() : instance;
-    }
-
-    /**
-     * TODO: Well it might be inefficient to make #getSession also static, as you could call this from the instance too
-     *
-     * @return Saved session
-     */
-    public static Session getSession(){
-        return getInstance().session == null ? getInstance().session = createSession() : getInstance().session;
-    }
-
-    /**
-     * Creates the session for GMail, should only be called once, or if session is over
-     *
-     * @return Session
-     */
-    private static Session createSession(){
-        return Session.getInstance(getInstance().properties,
-                new javax.mail.Authenticator() {
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username, password);
-                    }
-                }
-        );
     }
 
 }

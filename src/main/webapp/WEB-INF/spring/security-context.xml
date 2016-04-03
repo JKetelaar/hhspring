@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans"
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="http://www.springframework.org/schema/security"
              xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
@@ -15,7 +15,7 @@
                     username-parameter="j_username"
                     password-parameter="j_password"
                     login-processing-url="/j_spring_security_check"
-        authentication-success-handler-ref="authenticationSuccessHandler"/>
+                    authentication-success-handler-ref="authenticationSuccessHandler"/>
 
         <!-- changes due to upgrade form spring security 3.2 to 4.0  -->
         <!-- http://docs.spring.io/spring-security/site/migrate/current/3-to-4/html5/migrate-3-to-4-xml.html -->
@@ -36,7 +36,8 @@
                                        "SELECT users.username, USER_ROLES.role from USERS LEFT JOIN USERS_USER_ROLES ON USERS_USER_ROLES.users_id = USERS.id LEFT JOIN USER_ROLES ON USERS_USER_ROLES.roles_id = USER_ROLES.id WHERE username = ?  "/>
         </authentication-provider>
     </authentication-manager>
-    <beans:bean id="authenticationSuccessHandler" class="edu.avans.hartigehap.service.impl.CustomAuthenticationSuccessHandler">
-        <beans:property name="useReferer" value="true" />
+    <beans:bean id="authenticationSuccessHandler"
+                class="edu.avans.hartigehap.service.impl.CustomAuthenticationSuccessHandler">
+        <beans:property name="useReferer" value="true"/>
     </beans:bean>
 </beans:beans>
