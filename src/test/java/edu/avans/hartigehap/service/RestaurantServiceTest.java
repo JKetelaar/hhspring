@@ -38,7 +38,6 @@ public class RestaurantServiceTest extends AbstractTransactionRollbackTest {
         assertEquals("macaroni", meals.get(1).getId());
         List<MenuItem> drinks = new ArrayList<>(restaurants.get(0).getMenu().getDrinks());
         assertEquals("beer", drinks.get(0).getId());
-
     }
 
 }
