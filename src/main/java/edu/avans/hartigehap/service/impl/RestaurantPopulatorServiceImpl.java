@@ -43,7 +43,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private List<PredefinedMenu> predefinedMenus = new ArrayList<>();
 
     private void createPredefinedMenu() {
-        PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", "Great pancakes for breakfast");
+        PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", 10, "Great pancakes for breakfast");
         pancakeMenu = menuComponentRepository.save(pancakeMenu);
 
         MenuItem pancakeItem = new Meal("Pancake", "pancake.jpg", 3, "easy");

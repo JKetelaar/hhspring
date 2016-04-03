@@ -44,7 +44,9 @@ public class PredefinedMenu extends MenuComponent {
     @ManyToMany
     private Collection<Restaurant> restaurants = new ArrayList<>();
 
-    public PredefinedMenu(String id, String description) {
+    private int price;
+
+    public PredefinedMenu(String id, int price, String description) {
         super.setId(id);
         this.description = description;
     }
