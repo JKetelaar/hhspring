@@ -15,9 +15,9 @@ public interface UserRepository extends PagingAndSortingRepository<User, Long> {
      * Provides a user based on a requested username
      *
      * @param username String
-     * @return List of users
+     * @return The user object
      */
-    List<User> findByUsername(String username);
+    User findByUsername(String username);
 
     List<User> findByUsername(String username, boolean includeEnabled);
 

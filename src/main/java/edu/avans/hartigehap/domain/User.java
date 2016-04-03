@@ -6,13 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CollectionType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author JKetelaar
@@ -31,11 +30,16 @@ public class User extends DomainObject {
     @Size(min = 5, max = 60, message = "{validation.username.Size.message}")
     private String username;
 
+    private NotificationAdapter.Type type;
+
     @NotEmpty(message = "{validation.password.NotEmpty.message}")
     @Size(min = 5, max = 60, message = "{validation.password.Size.message}")
     private String password;
 
     private boolean enabled;
+
+    @ElementCollection(fetch=FetchType.EAGER)
+    private Map<String, String> properties = new HashMap<>();
 
     @ManyToMany
     private List<UserRole> roles = new ArrayList<>();
@@ -52,4 +56,23 @@ public class User extends DomainObject {
         enabled = customer.enabled;
     }
 
+    public void addProperty(String key, String value){
+        this.properties.put(key, value);
+    }
+
+    public void setEmail(String email){
+        this.properties.put("email", email);
+    }
+
+    public void setPhone(String phone){
+        this.properties.put("phine", phone);
+    }
+
+    public String getPhone(){
+        return this.properties.get("phone");
+    }
+
+    public String getEmail(){
+        return this.properties.get("email");
+    }
 }

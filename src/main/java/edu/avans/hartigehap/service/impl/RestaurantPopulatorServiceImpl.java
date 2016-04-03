@@ -107,7 +107,9 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         UserRole OBJECT_ROLE_MANAGER = createUserRoles(ROLE_MANAGER);
         UserRole OBJECT_ROLE_EMPLOYEE = createUserRoles(ROLE_EMPLOYEE);
         UserRole OBJECT_ROLE_CUSTOMER = createUserRoles(ROLE_CUSTOMER);
+
         createUser("jketelaar", "auditt01", true, Arrays.asList(OBJECT_ROLE_MANAGER, OBJECT_ROLE_EMPLOYEE));
+        assignUserWithEmail("jeroenketelaar@me.com", users.get(0));
     }
 
     private void createFoodCategory(String tag) {
@@ -166,6 +168,13 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         }
         user = userRepository.save(user);
         users.add(user);
+    }
+
+    private void assignUserWithEmail(String email, User user){
+        user.setType(NotificationAdapter.Type.EMAIL);
+        user.setEmail(email);
+
+        userRepository.save(user);
     }
 
     private void createDiningTables(int numberOfTables, Restaurant restaurant) {
