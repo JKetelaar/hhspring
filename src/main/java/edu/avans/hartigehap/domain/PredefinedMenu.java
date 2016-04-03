@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Iterator;
-import java.util.List;
 
 @Entity
 @Table(name = "MENUCOMPOSITE")
@@ -36,7 +36,7 @@ public class PredefinedMenu extends MenuComponent {
     @Column(name = "DESCRIPTION")
     String description;
 
-    public PredefinedMenu(String id, String description){
+    public PredefinedMenu(String id, String description) {
         super.setId(id);
         this.description = description;
     }
@@ -49,11 +49,11 @@ public class PredefinedMenu extends MenuComponent {
         menuComponents.remove(menuComponent);
     }
 
-    public MenuComponent getChild(int i){
+    public MenuComponent getChild(int i) {
         return menuComponents.get(i);
     }
 
-    public boolean isVegetarian(){
+    public boolean isVegetarian() {
         throw new UnsupportedOperationException();
     }
 
@@ -63,8 +63,8 @@ public class PredefinedMenu extends MenuComponent {
         System.out.println("---------------------");
 
         Iterator iterator = menuComponents.iterator();
-        while(iterator.hasNext()){
-            MenuComponent menuComponent = (MenuComponent)iterator.next();
+        while (iterator.hasNext()) {
+            MenuComponent menuComponent = (MenuComponent) iterator.next();
             menuComponent.print(depth);
         }
     }

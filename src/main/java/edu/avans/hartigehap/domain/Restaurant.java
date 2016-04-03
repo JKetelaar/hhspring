@@ -2,23 +2,18 @@ package edu.avans.hartigehap.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import java.util.Collection;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.persistence.*;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 /**
- * 
  * @author Erco
  */
 @Entity
@@ -26,7 +21,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
-@ToString(callSuper = true, includeFieldNames = true, of = { "menu", "diningTables", "customers" })
+@ToString(callSuper = true, includeFieldNames = true, of = {"menu", "diningTables", "customers"})
 @NoArgsConstructor
 public class Restaurant extends DomainObjectNaturalId {
     private static final long serialVersionUID = 1L;
@@ -43,6 +38,8 @@ public class Restaurant extends DomainObjectNaturalId {
     // no cascading
     @ManyToMany(mappedBy = "restaurants")
     private Collection<Customer> customers = new ArrayList<>();
+    @ManyToMany(mappedBy = "restaurants")
+    private List<Owner> owners;
 
     public Restaurant(String name, String imageFileName) {
         super(name);
@@ -86,7 +83,4 @@ public class Restaurant extends DomainObjectNaturalId {
         }
 
     }
-
-    @ManyToMany(mappedBy="restaurants")
-    private List<Owner> owners;
 }

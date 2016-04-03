@@ -2,36 +2,23 @@ package edu.avans.hartigehap.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
-import javax.persistence.Table;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
- * 
  * @author Erco
  */
 @Entity
 @Table(name = "MENUITEMS")
 // images are stored in a separate database table (optional)
-@SecondaryTable(name = "MENUITEM_IMAGES", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id") )
+@SecondaryTable(name = "MENUITEM_IMAGES", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
@@ -85,11 +72,11 @@ public abstract class MenuItem extends MenuComponent {
         System.out.println("---------------------");
 
         Iterator iterator = menuComponents.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             for (int i = 0; i < depth; i++) {
                 System.out.print("\t");
             }
-            MenuComponent menuComponent = (MenuComponent)iterator.next();
+            MenuComponent menuComponent = (MenuComponent) iterator.next();
             menuComponent.print(depth + 1);
         }
     }
