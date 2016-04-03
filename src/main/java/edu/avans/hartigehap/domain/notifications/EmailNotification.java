@@ -20,6 +20,9 @@ public class EmailNotification extends NotificationAdapter {
     private static EmailNotification instance;
     private Session session;
 
+    /**
+     * Constructing the email notification
+     */
     public EmailNotification() {
         super(Type.EMAIL);
 
