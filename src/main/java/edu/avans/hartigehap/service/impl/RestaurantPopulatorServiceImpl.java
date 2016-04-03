@@ -24,8 +24,6 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     @Autowired
     private FoodCategoryRepository foodCategoryRepository;
     @Autowired
-    private MenuItemRepository menuItemRepository;
-    @Autowired
     private CustomerRepository customerRepository;
     @Autowired
     private UserRoleRepository userRoleRepository;
@@ -132,20 +130,20 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         // like "object references an unsaved transient instance - save the
         // transient instance before flushing:"
         meal.addFoodCategories(foodCats);
-        meal = menuItemRepository.save(meal);
+        meal = menuComponentRepository.save(meal);
         meals.add(meal);
     }
 
     private void createDrink(String name, String image, int price, Drink.Size size, List<FoodCategory> foodCats) {
         Drink drink = new Drink(name, image, price, size);
-        drink = menuItemRepository.save(drink);
+        drink = menuComponentRepository.save(drink);
         drink.addFoodCategories(foodCats);
         drinks.add(drink);
     }
 
     private void createCondimentedDrink(String name, String image, int price, Drink drink) {
         MenuItemDecorator condimentDrink = new Condiment(drink, name, image, price);
-        condimentDrink = menuItemRepository.save(condimentDrink);
+        condimentDrink = menuComponentRepository.save(condimentDrink);
         drink.add(condimentDrink);
         condimentDrink.addFoodCategories(drink.getFoodCategories());
     }

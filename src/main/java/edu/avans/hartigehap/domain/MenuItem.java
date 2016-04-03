@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * @author Erco
+ * @author Erco, JKetelaar
  */
 @Entity
 @Table(name = "MENUITEMS")
@@ -37,18 +37,14 @@ public abstract class MenuItem extends MenuComponent {
     @Column(name = "IMAGEFILENAME")
     private String imageFileName;
 
-    // JPA is case sensitive: the corresponding column name will be in small
-    // caps "price"
-    private int price;
-
     // no cascade
     @ManyToMany
     private Collection<FoodCategory> foodCategories = new ArrayList<FoodCategory>();
 
     public MenuItem(String id, String imageFileName, int price) {
         super.setId(id);
+        super.setPrice(price);
         this.imageFileName = imageFileName;
-        this.price = price;
     }
 
     public void addFoodCategories(Collection<FoodCategory> foodCategories) {

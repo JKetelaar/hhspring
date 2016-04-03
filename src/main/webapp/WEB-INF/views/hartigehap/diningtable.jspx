@@ -224,7 +224,7 @@
                                     <tr>
                                         <td class="capitalise">${predefinedMenu.id}</td>
                                         <td><img id="menuitemimg" src="${imageUrl}" width="150px"/></td>
-                                        <td>${labelCurrency} ${menuItem.price}</td>
+                                        <td>${labelCurrency} ${predefinedMenu.price}</td>
                                         <td>
                                             <spring:url var="addOrderItemUrl"
                                                         value="/diningTables/${diningTable.id}/menuItems"/>

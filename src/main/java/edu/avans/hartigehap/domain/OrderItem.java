@@ -13,26 +13,26 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 /**
- * @author Erco
+ * @author Erco, JKetelaar
  */
 @Entity
 @Table(name = "ORDERITEMS")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
 @Setter
-@ToString(callSuper = true, includeFieldNames = true, of = {"menuItem", "quantity"})
+@ToString(callSuper = true, includeFieldNames = true, of = {"menuComponent", "quantity"})
 @NoArgsConstructor
 public class OrderItem extends DomainObject {
     private static final long serialVersionUID = 1L;
 
     // unidirectional many-to-one; deliberately no cascade
     @ManyToOne
-    private MenuItem menuItem;
+    private MenuComponent menuComponent;
 
     private int quantity = 0;
 
-    public OrderItem(MenuItem menuItem, int quantity) {
-        this.menuItem = menuItem;
+    public OrderItem(MenuComponent menuComponent, int quantity) {
+        this.menuComponent = menuComponent;
         this.quantity = quantity;
     }
 
@@ -47,11 +47,21 @@ public class OrderItem extends DomainObject {
     }
 
     public String description() {
-        return menuItem.getId() + " (" + quantity + "x)";
+        return menuComponent.getId() + " (" + quantity + "x)";
     }
 
     @Transient
     public int getPrice() {
-        return menuItem.getPrice() * quantity;
+        return menuComponent.getPrice() * quantity;
+    }
+
+    /**
+     * Allowing compatibility with the code, for the previous #getMenuItem
+     *
+     * @return MenuComponent
+     */
+    @Transient
+    public MenuComponent getMenuItem(){
+        return menuComponent;
     }
 }

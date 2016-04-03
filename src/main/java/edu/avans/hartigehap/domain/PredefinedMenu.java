@@ -44,10 +44,9 @@ public class PredefinedMenu extends MenuComponent {
     @ManyToMany
     private Collection<Restaurant> restaurants = new ArrayList<>();
 
-    private int price;
-
     public PredefinedMenu(String id, int price, String description) {
         super.setId(id);
+        super.setPrice(price);
         this.description = description;
     }
 
@@ -83,5 +82,10 @@ public class PredefinedMenu extends MenuComponent {
 
     public void addRestaurant(Restaurant restaurant){
         this.restaurants.add(restaurant);
+    }
+
+    @Override
+    public int getPrice() {
+        return super.getPrice();
     }
 }
