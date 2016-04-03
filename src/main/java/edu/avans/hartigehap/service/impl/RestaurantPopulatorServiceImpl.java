@@ -215,7 +215,9 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
             restaurant.getMenu().getDrinks().add(drink);
         }
 
+        // Manipulating the predefined menus to add them to the restaurants
         for (PredefinedMenu predefinedMenu : predefinedMenus){
+            predefinedMenu.addRestaurant(restaurant);
             restaurant.getPredefinedMenus().add(predefinedMenu);
         }
 

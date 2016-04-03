@@ -78,4 +78,8 @@ public class PredefinedMenu extends MenuComponent {
             menuComponent.print(depth);
         }
     }
+
+    public void addRestaurant(Restaurant restaurant){
+        this.restaurants.add(restaurant);
+    }
 }

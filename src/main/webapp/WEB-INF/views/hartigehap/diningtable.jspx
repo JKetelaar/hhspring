@@ -218,12 +218,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:if test="${not empty foodCategory.menuItems}">
-                                <c:forEach items="${foodCategory.menuItems}" var="menuItem">
-                                    <spring:url var="imageUrl" value="/resources/images/${menuItem.imageFileName}"/>
+                            ${restaurant.predefinedMenus}
+                            <c:if test="${not empty restaurant.predefinedMenus}">
+                                <c:forEach items="${restaurant.predefinedMenus}" var="predefinedMenus">
                                     <tr>
                                         <td class="capitalise">${menuItem.id}</td>
-                                        <td><img id="menuitemimg" src="${imageUrl}" width="150px"/></td>
                                         <td>${labelCurrency} ${menuItem.price}</td>
                                         <td>
                                             <spring:url var="addOrderItemUrl"
