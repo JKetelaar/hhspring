@@ -60,6 +60,7 @@ public class OrderItem extends DomainObject {
      *
      * @return MenuComponent
      */
+    @Deprecated
     @Transient
     public MenuComponent getMenuItem(){
         return menuComponent;
