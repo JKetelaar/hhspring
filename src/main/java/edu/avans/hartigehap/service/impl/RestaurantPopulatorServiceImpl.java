@@ -40,6 +40,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private List<Customer> customers = new ArrayList<>();
     private List<UserRole> userRoles = new ArrayList<>();
     private List<User> users = new ArrayList<>();
+    private List<PredefinedMenu> predefinedMenus = new ArrayList<>();
 
     private void createPredefinedMenu() {
         PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", "Great pancakes for breakfast");
@@ -55,6 +56,8 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
 
         pancakeMenu.add(pancakeItem);
         pancakeMenu.add(colaItem);
+
+        predefinedMenus.add(pancakeMenu);
     }
 
     /**
@@ -212,7 +215,9 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
             restaurant.getMenu().getDrinks().add(drink);
         }
 
-//        createCondimentedDrink("Coffee with sugar", "coffee.jpg", 2, drinks.get(1));
+        for (PredefinedMenu predefinedMenu : predefinedMenus){
+            restaurant.getPredefinedMenus().add(predefinedMenu);
+        }
 
         // for the moment, every customer has dined in every restaurant
         // no cascading between customer and restaurant; therefore both
