@@ -41,26 +41,19 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private List<User> users = new ArrayList<>();
 
     private void createPredefinedMenu(){
-        PredefinedMenu allMenus = new PredefinedMenu("Alle menu's", "Alle menu's");
         PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", "Great pancakes for breakfast");
-        pancakeMenu.setParent(allMenus);
+        pancakeMenu = menuComponentRepository.save(pancakeMenu);
 
         MenuItem pancakeItem = new Meal("Pancake", "NietTeVinden.png", 3, "easy");
+        pancakeItem = menuComponentRepository.save(pancakeItem);
         pancakeItem.setParent(pancakeMenu);
 
-        MenuItem sugarItem = new Meal("Suiker", "OokNietTeVinden.png", 1, "easy");
-        sugarItem.setParent(pancakeItem);
-
         MenuItem colaItem = new Drink("Cola", "cola.png", 3, Drink.Size.MEDIUM);
+        colaItem = menuComponentRepository.save(colaItem);
         colaItem.setParent(pancakeMenu);
 
-        pancakeItem.add(sugarItem);
         pancakeMenu.add(pancakeItem);
         pancakeMenu.add(colaItem);
-
-        allMenus.add(pancakeMenu);
-
-//        menuComponentRepository.save(allMenus);
     }
 
     /**
@@ -111,6 +104,8 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
 
         createUser("jketelaar", "auditt01", true, Arrays.asList(OBJECT_ROLE_MANAGER, OBJECT_ROLE_EMPLOYEE));
         assignUserWithEmail("jeroenketelaar@me.com", users.get(0));
+
+        createPredefinedMenu();
     }
 
     private void createFoodCategory(String tag) {
@@ -222,8 +217,6 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
             customer.getRestaurants().add(restaurant);
             restaurant.getCustomers().add(customer);
         }
-
-        createPredefinedMenu();
 
         return restaurant;
     }
