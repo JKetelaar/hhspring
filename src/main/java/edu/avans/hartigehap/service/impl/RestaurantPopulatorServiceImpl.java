@@ -105,9 +105,11 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         UserRole OBJECT_ROLE_EMPLOYEE = createUserRoles(ROLE_EMPLOYEE);
         UserRole OBJECT_ROLE_CUSTOMER = createUserRoles(ROLE_CUSTOMER);
 
+        // Creating users and assigning with notification system
         createUser("jketelaar", "auditt01", true, Arrays.asList(OBJECT_ROLE_MANAGER, OBJECT_ROLE_EMPLOYEE));
         assignUserWithEmail("jeroenketelaar@me.com", users.get(0));
 
+        // Creating the predefined menus
         createPredefinedMenu();
     }
 
