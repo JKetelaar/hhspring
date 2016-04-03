@@ -89,7 +89,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         // create Drinks
         createDrink("beer", "beer.jpg", 1, Drink.Size.LARGE, Collections.singletonList(foodCats.get(5)));
         createDrink("coffee", "coffee.jpg", 1, Drink.Size.MEDIUM, Collections.singletonList(foodCats.get(6)));
-        createCondimentedDrink("Coffee with sugar", "coffee.jpg", 1, drinks.get(1));
+        createCondimentedDrink("Coffee with sugar", "coffee-with-sugar.jpg", 1, drinks.get(1));
 
         // create Customers
         byte[] photo = new byte[]{127, -128, 0};
