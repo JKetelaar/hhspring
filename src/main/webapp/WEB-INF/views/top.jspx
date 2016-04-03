@@ -33,6 +33,7 @@
     <spring:message code="label_language" var="labelLanguage"/>
     <spring:message code="label_en_US" var="labelEnUs"/>
     <spring:message code="label_nl_NL" var="labelNlNl"/>
+    <spring:message code="label_de_DE" var="labelDeDe"/>
 
     <spring:message code="label_layout" var="labelLayout" />
     <spring:message code="label_theme_standard" var="labelThemeStandard"/>
@@ -167,7 +168,7 @@
                             <li>${labelLanguage} <span class="glyphicon glyphicon-comment glyphicon-padding-left"><jsp:text /></span></li>
                             <li><a href="?lang=en_US">${labelEnUs}</a></li>
                             <li><a href="?lang=nl_NL">${labelNlNl}</a></li>
-                            <li><a href="?lang=de_DE">${labelDEDe}</a></li>
+                            <li><a href="?lang=de_DE">${labelDeDe}</a></li>
                             <li class="divider"><jsp:text /></li>
                             <li>${labelLayout} <span class="glyphicon glyphicon-adjust glyphicon-padding-left"><jsp:text /></span></li>
                             <li><a href="?theme=standard">${labelThemeStandard}</a></li>
