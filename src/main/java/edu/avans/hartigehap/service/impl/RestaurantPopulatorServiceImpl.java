@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service("restaurantPopulatorService")
@@ -86,8 +87,8 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
                 Arrays.<FoodCategory>asList(foodCats.get(3), foodCats.get(1), foodCats.get(2)));
 
         // create Drinks
-        createDrink("beer", "beer.jpg", 1, Drink.Size.LARGE, Arrays.<FoodCategory>asList(foodCats.get(5)));
-        createDrink("coffee", "coffee.jpg", 1, Drink.Size.MEDIUM, Arrays.<FoodCategory>asList(foodCats.get(6)));
+        createDrink("beer", "beer.jpg", 1, Drink.Size.LARGE, Collections.singletonList(foodCats.get(5)));
+        createDrink("coffee", "coffee.jpg", 1, Drink.Size.MEDIUM, Collections.singletonList(foodCats.get(6)));
         createCondimentedDrink("Coffee with sugar", "coffee.jpg", 1, drinks.get(1));
 
         // create Customers
