@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +43,8 @@ public class PredefinedMenu extends MenuComponent {
         this.description = description;
     }
 
+    // Should be important to read other committed changes
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void add(MenuComponent menuComponent) {
         menuComponents.add(menuComponent);
     }

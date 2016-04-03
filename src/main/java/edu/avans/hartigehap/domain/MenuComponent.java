@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -51,6 +53,7 @@ public abstract class MenuComponent extends DomainObjectNaturalId {
         return (parent == null);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public void setParent(MenuComponent parent) {
         this.parent = parent;
     }
