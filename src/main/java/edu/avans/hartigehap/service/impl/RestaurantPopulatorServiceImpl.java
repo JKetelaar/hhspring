@@ -45,11 +45,11 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", "Great pancakes for breakfast");
         pancakeMenu = menuComponentRepository.save(pancakeMenu);
 
-        MenuItem pancakeItem = new Meal("Pancake", "NietTeVinden.png", 3, "easy");
+        MenuItem pancakeItem = new Meal("Pancake", "pancake.jpg", 3, "easy");
         pancakeItem = menuComponentRepository.save(pancakeItem);
         pancakeItem.setParent(pancakeMenu);
 
-        MenuItem colaItem = new Drink("Cola", "cola.png", 3, Drink.Size.MEDIUM);
+        MenuItem colaItem = new Drink("Cola", "cola.jpg", 3, Drink.Size.MEDIUM);
         colaItem = menuComponentRepository.save(colaItem);
         colaItem.setParent(pancakeMenu);
 
@@ -100,6 +100,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         // These naming conventions are on purpose
         String ROLE_MANAGER = "ROLE_MANAGER", ROLE_EMPLOYEE = "ROLE_EMPLOYEE", ROLE_CUSTOMER = "ROLE_CUSTOMER";
 
+        // Creating roles
         UserRole OBJECT_ROLE_MANAGER = createUserRoles(ROLE_MANAGER);
         UserRole OBJECT_ROLE_EMPLOYEE = createUserRoles(ROLE_EMPLOYEE);
         UserRole OBJECT_ROLE_CUSTOMER = createUserRoles(ROLE_CUSTOMER);
