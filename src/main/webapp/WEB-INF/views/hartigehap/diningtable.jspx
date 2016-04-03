@@ -225,6 +225,29 @@
 											</form:form>
 										</td>
 									</tr>
+									<c:forEach items="${menuItem.decorations}" var="decoration">
+										<c:forEach var="item" items="${diningTable.currentBill.currentOrder.orderItems}">
+											<c:if test="${item.id eq decoration.menuItem.id}">
+												<spring:url var="imageUrl" value="/resources/images/${item.imageFileName}" />
+												<tr>
+													<td class="capitalise">${item.id}</td>
+													<td><img id="menuitemimg" src="${imageUrl}" width="150px" /></td>
+													<td>${labelCurrency} ${item.price}</td>
+													<td>
+														<spring:url var="addOrderItemUrl" value="/diningTables/${diningTable.id}/menuItems" />
+														<form:form name="addOrderItemForm" action="${addOrderItemUrl}" method="post">
+															<input type="hidden" name="menuItemName" value="${item.id}" />
+															<button type="submit" class="btn btn-success btn-float-left-margin-right" value="${labelAddButton}"><span class="glyphicon glyphicon-plus-sign glyphicon-padding-right"><jsp:text /></span> ${labelAddButton}</button>
+														</form:form>
+														<spring:url var="deleteOrderItemUrl" value="/diningTables/${diningTable.id}/menuItems/${item.id}" />
+														<form:form name="deleteOrderItemForm" action="${deleteOrderItemUrl}" method="delete">
+															<button type="submit" class="btn btn-danger btn-float-left-margin-right" value="${labelRemoveButton}"><span class="glyphicon glyphicon-remove-sign glyphicon-padding-right"><jsp:text /></span> ${labelRemoveButton}</button>
+														</form:form>
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</c:forEach>
 								</c:forEach>
 							</c:if>
 							</tbody>
