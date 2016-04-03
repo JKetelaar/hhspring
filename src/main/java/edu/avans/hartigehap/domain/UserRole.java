@@ -9,9 +9,13 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author JKetelaar
@@ -25,11 +29,10 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class UserRole extends DomainObject {
 
-    private static final long serialVersionUID = 1L;
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users = new ArrayList<User>();
 
-    // bidirectional one-to-many relationship
-    @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
-    private User user;
+    private static final long serialVersionUID = 1L;
 
     @NotEmpty(message = "{validation.user.role.NotEmpty.message}")
     @Size(min = 5, max = 60, message = "{validation.user.role.Size.message}")

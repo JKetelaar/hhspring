@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -25,13 +27,14 @@ public abstract class MenuItemDecorator extends MenuItem {
 
     // unidirectional one-to-one and no cascading
     @OneToOne
-    private Drink drink;
+    private MenuItem menuItem;
 
-    protected int extraPrice;
+    private int extraPrice;
 
-    public MenuItemDecorator(Drink drink, String id, String imageFileName, int price) {
+    public MenuItemDecorator(MenuItem drink, String id, String imageFileName, int price) {
         super(id, imageFileName, drink.getPrice());
-        this.drink = drink;
+        this.menuItem = drink;
+        this.extraPrice = price;
     }
 
     @Override

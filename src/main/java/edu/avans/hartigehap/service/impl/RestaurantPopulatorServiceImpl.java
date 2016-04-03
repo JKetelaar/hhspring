@@ -31,14 +31,11 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private MenuItemDecoratorRepository drinkDecoratorRepository;
-    @Autowired
     private MenuComponentRepository menuComponentRepository;
 
     private List<Meal> meals = new ArrayList<>();
     private List<FoodCategory> foodCats = new ArrayList<>();
     private List<Drink> drinks = new ArrayList<>();
-    private List<MenuItemDecorator> decoratoredDrinks = new ArrayList<>();
     private List<Customer> customers = new ArrayList<>();
     private List<UserRole> userRoles = new ArrayList<>();
     private List<User> users = new ArrayList<>();
@@ -97,19 +94,13 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
 
         // create Drinks
         createDrink("beer", "beer.jpg", 1, Drink.Size.LARGE, Arrays.<FoodCategory>asList(foodCats.get(5)));
-        Drink coffee = createDrink("coffee", "coffee.jpg", 1, Drink.Size.MEDIUM, Arrays.<FoodCategory>asList(foodCats.get(6)));
-
-        createCondimentedDrink("Coffee with sugar", "coffee.jpg", 2, coffee);
+        createDrink("coffee", "coffee.jpg", 1, Drink.Size.MEDIUM, Arrays.<FoodCategory>asList(foodCats.get(6)));
 
         // create Customers
         byte[] photo = new byte[]{127, -128, 0};
         createCustomer("peter", "limonade", new DateTime(), 1, "description", photo);
         createCustomer("barry", "batsbak", new DateTime(), 1, "description", photo);
         createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
-        createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
-        createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
-
-
 
         String ROLE_MANAGER = "ROLE_MANAGER", ROLE_EMPLOYEE = "ROLE_EMPLOYEE", ROLE_CUSTOMER = "ROLE_CUSTOMER";
 
@@ -139,19 +130,17 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         meals.add(meal);
     }
 
-    private Drink createDrink(String name, String image, int price, Drink.Size size, List<FoodCategory> foodCats) {
+    private void createDrink(String name, String image, int price, Drink.Size size, List<FoodCategory> foodCats) {
         Drink drink = new Drink(name, image, price, size);
         drink = menuItemRepository.save(drink);
         drink.addFoodCategories(foodCats);
         drinks.add(drink);
-
-        return drink;
     }
 
     private void createCondimentedDrink(String name, String image, int price, Drink drink){
         MenuItemDecorator condimentDrink = new Condiment(drink, name, image, price);
-        drinkDecoratorRepository.save(condimentDrink);
-        decoratoredDrinks.add(condimentDrink);
+        condimentDrink = menuItemRepository.save(condimentDrink);
+        drink.add(condimentDrink);
     }
 
     private void createCustomer(String firstName, String lastName, DateTime birthDate, int partySize,
@@ -163,8 +152,9 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
 
     private UserRole createUserRoles(String role) {
         UserRole userRole = new UserRole(role);
+        userRole = userRoleRepository.save(userRole);
+
         userRoles.add(userRole);
-        userRoleRepository.save(userRole);
 
         return userRole;
     }
@@ -174,8 +164,8 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         for (UserRole role : roles) {
             user.getRoles().add(role);
         }
+        user = userRepository.save(user);
         users.add(user);
-        userRepository.save(user);
     }
 
     private void createDiningTables(int numberOfTables, Restaurant restaurant) {
@@ -210,6 +200,8 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         for (Drink drink : drinks) {
             restaurant.getMenu().getDrinks().add(drink);
         }
+
+//        createCondimentedDrink("Coffee with sugar", "coffee.jpg", 2, drinks.get(1));
 
         // for the moment, every customer has dined in every restaurant
         // no cascading between customer and restaurant; therefore both

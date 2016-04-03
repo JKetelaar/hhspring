@@ -28,6 +28,6 @@ public class Condiment extends MenuItemDecorator {
 
     @Override
     public int getPrice() {
-        return super.extraPrice + getDrink().getPrice();
+        return super.getExtraPrice() + getMenuItem().getPrice();
     }
 }
