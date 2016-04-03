@@ -8,6 +8,11 @@ public abstract class NotificationAdapter {
         this.type = type;
     }
 
+    /**
+     * Returns the type of the current adapter
+     *
+     * @return Type of this adapter
+     */
     public Type getType() {
         return type;
     }
@@ -21,6 +26,9 @@ public abstract class NotificationAdapter {
      */
     public abstract boolean send(String receiver, String message) throws Exception;
 
+    /**
+     * All types of notifications, simply add yours :~)
+     */
     public enum Type {
         EMAIL("email"),
         SMS("sms");
