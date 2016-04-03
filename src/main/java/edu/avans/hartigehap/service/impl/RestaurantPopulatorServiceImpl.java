@@ -41,14 +41,22 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private List<User> users = new ArrayList<>();
 
     private void createPredefinedMenu(){
-        MenuComponent allMenus = new PredefinedMenu("Alle menu's", "Alle menu's");
-        MenuComponent pancakeMenu = new PredefinedMenu("Pancake menu", "Great pancakes for breakfast");
+        PredefinedMenu allMenus = new PredefinedMenu("Alle menu's", "Alle menu's");
+        PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", "Great pancakes for breakfast");
+        pancakeMenu.setParent(allMenus);
 
-        MenuItem panecakeItem = new Meal("Pancake", "NietTeVinden.png", 3, "easy");
-        MenuItem sugerItem = new Meal("Suiker", "OokNietTeVinden.png", 1, "easy");
-        MenuItem testItem = new Meal("Test", "WatIsTest.wav", 1, "easy");
-        MenuItem testTweeItem = new Meal("TestTwee", "WatIsTestTwee.wav", 1, "easy");
-        MenuItem cokeItem = new Drink("Cola", "WaarIsDeze.jpg", 2, Drink.Size.LARGE);
+        MenuItem pancakeItem = new Meal("Pancake", "NietTeVinden.png", 3, "easy");
+        pancakeItem.setParent(pancakeMenu);
+
+        MenuItem sugarItem = new Meal("Suiker", "OokNietTeVinden.png", 1, "easy");
+        sugarItem.setParent(pancakeItem);
+
+        MenuItem colaItem = new Drink("Cola", "cola.png", 3, Drink.Size.MEDIUM);
+        colaItem.setParent(pancakeMenu);
+
+        pancakeItem.add(sugarItem);
+        pancakeMenu.add(pancakeItem);
+        pancakeMenu.add(colaItem);
 
         allMenus.add(pancakeMenu);
 
@@ -196,6 +204,8 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
             customer.getRestaurants().add(restaurant);
             restaurant.getCustomers().add(customer);
         }
+
+        createPredefinedMenu();
 
         return restaurant;
     }

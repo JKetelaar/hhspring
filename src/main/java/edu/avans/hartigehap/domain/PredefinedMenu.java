@@ -3,6 +3,7 @@ package edu.avans.hartigehap.domain;
 /**
  * @author thom145
  */
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
@@ -10,12 +11,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
-import java.util.Iterator;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 @Entity
 @Table(name = "MENUCOMPOSITE")
@@ -34,16 +33,11 @@ name and the description of the menu
 public class PredefinedMenu extends MenuComponent {
     private static final long serialVersionUID = 1L;
 
-    //Menu can have any number of children of type MenuComponent
-    //I'm using an internal ArrayList to hold these
-    private ArrayList<MenuComponent> menuComponents = new ArrayList<>();
-    @Column(name = "ID")
-    String id;
     @Column(name = "DESCRIPTION")
     String description;
 
     public PredefinedMenu(String id, String description){
-        this.id = id;
+        super.setId(id);
         this.description = description;
     }
 
@@ -55,8 +49,8 @@ public class PredefinedMenu extends MenuComponent {
         menuComponents.remove(menuComponent);
     }
 
-    public  MenuComponent getChild(int i){
-        return (MenuComponent)menuComponents.get(i);
+    public MenuComponent getChild(int i){
+        return menuComponents.get(i);
     }
 
     public boolean isVegetarian(){
@@ -64,7 +58,7 @@ public class PredefinedMenu extends MenuComponent {
     }
 
     public void print(int depth) {
-        System.out.print("\n" + id);
+        System.out.print("\n" + super.getId());
         System.out.println(", " + description);
         System.out.println("---------------------");
 

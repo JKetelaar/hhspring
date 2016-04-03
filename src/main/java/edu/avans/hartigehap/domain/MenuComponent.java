@@ -9,12 +9,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
-@Entity
+@Entity()
 @Table(name = "MENUCOMPONENT")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
 @Getter
@@ -29,6 +32,13 @@ we want to provide default implementations for these methods
 public abstract class MenuComponent extends DomainObjectNaturalId {
     private static final long serialVersionUID = 1L;
 
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private MenuComponent parent;
+
+    @OneToMany(mappedBy = "parent", targetEntity = MenuComponent.class, fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    protected List<MenuComponent> menuComponents = new ArrayList<>();
+
     public void add(MenuComponent menuComponent) {
         throw new UnsupportedOperationException();
     }
@@ -38,4 +48,13 @@ public abstract class MenuComponent extends DomainObjectNaturalId {
     }
 
     public abstract void print(int depth);
+
+    @Transient()
+    public boolean isRoot() {
+        return (parent == null);
+    }
+
+    public void setParent(MenuComponent parent) {
+        this.parent = parent;
+    }
 }

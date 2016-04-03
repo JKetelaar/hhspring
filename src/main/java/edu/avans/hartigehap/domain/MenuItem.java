@@ -54,8 +54,6 @@ public abstract class MenuItem extends MenuComponent {
     // caps "price"
     private int price;
 
-    private ArrayList<MenuComponent> menuComponents = new ArrayList<>();
-
     // no cascade
     @ManyToMany
     private Collection<FoodCategory> foodCategories = new ArrayList<FoodCategory>();
