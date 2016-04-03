@@ -97,6 +97,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         createCustomer("barry", "batsbak", new DateTime(), 1, "description", photo);
         createCustomer("piet", "bakker", new DateTime(), 1, "description", photo);
 
+        // These naming conventions are on purpose
         String ROLE_MANAGER = "ROLE_MANAGER", ROLE_EMPLOYEE = "ROLE_EMPLOYEE", ROLE_CUSTOMER = "ROLE_CUSTOMER";
 
         UserRole OBJECT_ROLE_MANAGER = createUserRoles(ROLE_MANAGER);
