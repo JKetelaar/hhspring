@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Login Page</title>
@@ -59,17 +59,17 @@
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type='password' name='pass' /></td>
+                <td><input type='password' name='pass'/></td>
             </tr>
             <tr>
                 <td colspan='2'>
-                    <input name="submit" type="submit" value="submit" />
+                    <input name="submit" type="submit" value="submit"/>
                 </td>
             </tr>
         </table>
 
         <input type="hidden"
-               name="${_csrf.parameterName}" value="${_csrf.token}" />
+               name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form>
 </div>
 

@@ -94,9 +94,9 @@ public class DiningTableServiceImpl implements DiningTableService {
         diningTable.submitBill();
     }
 
-    private void menuItemWarmup(){
+    private void menuItemWarmup() {
         Iterator<MenuItem> menuItemIterator = menuItemRepository.findAll().iterator();
-        while(menuItemIterator.hasNext()){
+        while (menuItemIterator.hasNext()) {
             MenuItem menuItem = menuItemIterator.next();
             log.debug(menuItem.getId());
         }

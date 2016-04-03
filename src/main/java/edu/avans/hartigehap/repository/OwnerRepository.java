@@ -2,7 +2,6 @@ package edu.avans.hartigehap.repository;
 
 import edu.avans.hartigehap.domain.Owner;
 import edu.avans.hartigehap.domain.Restaurant;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

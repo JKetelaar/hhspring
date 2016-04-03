@@ -10,9 +10,13 @@ import java.util.List;
 public interface OwnerService {
 
     List<Owner> findAll();
+
     Owner findById(Long id);
+
     List<Owner> findByName(String name);
+
     Owner save(Owner owner);
+
     void delete(Owner owner);
 
 }

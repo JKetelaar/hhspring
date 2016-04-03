@@ -40,7 +40,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private List<UserRole> userRoles = new ArrayList<>();
     private List<User> users = new ArrayList<>();
 
-    private void createPredefinedMenu(){
+    private void createPredefinedMenu() {
         PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", "Great pancakes for breakfast");
         pancakeMenu = menuComponentRepository.save(pancakeMenu);
 
@@ -135,7 +135,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         drinks.add(drink);
     }
 
-    private void createCondimentedDrink(String name, String image, int price, Drink drink){
+    private void createCondimentedDrink(String name, String image, int price, Drink drink) {
         MenuItemDecorator condimentDrink = new Condiment(drink, name, image, price);
         condimentDrink = menuItemRepository.save(condimentDrink);
         drink.add(condimentDrink);
@@ -167,7 +167,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         users.add(user);
     }
 
-    private void assignUserWithEmail(String email, User user){
+    private void assignUserWithEmail(String email, User user) {
         user.setType(NotificationAdapter.Type.EMAIL);
         user.setEmail(email);
 
