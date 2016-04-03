@@ -60,7 +60,7 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
 
         allMenus.add(pancakeMenu);
 
-        menuComponentRepository.save(allMenus);
+//        menuComponentRepository.save(allMenus);
     }
 
     /**

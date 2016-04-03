@@ -147,6 +147,9 @@
 								<li><a href="#tabs-${foodCategory.id}" class="capitalise" data-toggle="tab">${foodCategory.tag}</a></li>
 							</c:if>
 						</c:forEach>
+						<li>
+							<a href="#tabs-predefined" class="capitalise" data-toggle="tab">Predefined</a>
+						</li>
 					</ul>
 				</span>
 			</div>
