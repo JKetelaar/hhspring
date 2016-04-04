@@ -40,22 +40,60 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private List<User> users = new ArrayList<>();
     private List<PredefinedMenu> predefinedMenus = new ArrayList<>();
 
+    /**
+     * Creating the predefined menus
+     */
     private void createPredefinedMenu() {
-        PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", 10, "Great pancakes for breakfast");
+        /* Pancake menu */
+        PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", 15, "Great pancakes for breakfast");
         pancakeMenu = menuComponentRepository.save(pancakeMenu);
 
         MenuItem pancakeItem = new Meal("Pancake", "pancake.jpg", 3, "easy");
         pancakeItem = menuComponentRepository.save(pancakeItem);
         pancakeItem.setParent(pancakeMenu);
 
+        MenuItem sugarItem = new Meal("Sugar", "sugar.jpg", 1, "easy");
+        sugarItem = menuComponentRepository.save(sugarItem);
+        sugarItem.setParent(pancakeItem);
+
+        MenuItem syrupItem = new Meal("Syrup", "syrup.jpg", 1, "easy");
+        syrupItem = menuComponentRepository.save(syrupItem);
+        syrupItem.setParent(pancakeItem);
+
         MenuItem colaItem = new Drink("Cola", "cola.jpg", 3, Drink.Size.MEDIUM);
         colaItem = menuComponentRepository.save(colaItem);
         colaItem.setParent(pancakeMenu);
+
+        MenuItem strawItem = new Drink("Straw", "straw.jpg", 1, Drink.Size.SMALL);
+        strawItem = menuComponentRepository.save(strawItem);
+        strawItem.setParent(colaItem);
 
         pancakeMenu.add(pancakeItem);
         pancakeMenu.add(colaItem);
 
         predefinedMenus.add(pancakeMenu);
+
+        /* Burger menu */
+        PredefinedMenu burgerMenu = new PredefinedMenu("Burger menu", 22, "Great burgers for dinner");
+        burgerMenu = menuComponentRepository.save(burgerMenu);
+
+        MenuItem bread = new Meal("Bread", "bread.jpg", 3, "easy");
+        bread = menuComponentRepository.save(bread);
+        bread.setParent(burgerMenu);
+
+        MenuItem burger = new Meal("Burger", "burger.jpg", 3, "medium");
+        burger = menuComponentRepository.save(burger);
+        burger.setParent(bread);
+
+        MenuItem cheese = new Meal("Cheese", "cheese.jpg", 1, "easy");
+        cheese = menuComponentRepository.save(cheese);
+        cheese.setParent(burger);
+
+        MenuItem drink = new Drink("Cola", "cola.jpg", 2, Drink.Size.SMALL);
+        drink = menuComponentRepository.save(drink);
+        drink.setParent(burgerMenu);
+
+        predefinedMenus.add(burgerMenu);
     }
 
     /**
