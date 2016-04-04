@@ -35,6 +35,13 @@ public class UserController {
     @Autowired
     private UserRoleRepository userRoleRepository;
 
+    /**
+     * Retrieves the page to edit your profile
+     *
+     * @param uiModel
+     *
+     * @return Path of the edit page
+     */
     @RequestMapping(value = "/profile/edit", method = RequestMethod.GET)
     public String editProfile(Model uiModel) {
 
@@ -51,6 +58,13 @@ public class UserController {
         return "hartigehap/profile";
     }
 
+    /**
+     * Allows you to actually edit your profile
+     *
+     * @param newUser
+     *
+     * @return Path to the result page
+     */
     @RequestMapping(value = "/profile/edit", method = RequestMethod.PUT)
     public String editProfile(@RequestBody User newUser) {
 
