@@ -41,19 +41,24 @@
     <script type="text/javascript" src="${jquery_url}">
         <jsp:text
          />
+
     </script>
     <script type="text/javascript" src="${bootstrap_js_url}">
         <jsp:text
          />
+
     </script>
     <script type="text/javascript" src="${bootstrap_image_preview_url}">
         <jsp:text/>
+
     </script>
     <script type="text/javascript" src="${bootstrap_datepicker_url}">
         <jsp:text/>
+
     </script>
     <script type="text/javascript" src="${bootstrap_chooser_url}">
         <jsp:text/>
+
     </script>
 </head>
 <body>

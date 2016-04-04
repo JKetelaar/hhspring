@@ -116,7 +116,7 @@
                         <span class="input-group-addon input-group-min-width" id="type"
                               path="type">${labelType}</span>
                         <form:select path="type" class="form-control">
-                            <form:options items="${types}" itemValue="name" itemLabel="name" />
+                            <form:options items="${types}" itemValue="name" itemLabel="name"/>
                         </form:select>
                         <div>
                             <form:errors path="type" cssClass="error"/>

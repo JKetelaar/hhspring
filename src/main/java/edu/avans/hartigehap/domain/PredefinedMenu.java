@@ -80,7 +80,7 @@ public class PredefinedMenu extends MenuComponent {
         }
     }
 
-    public void addRestaurant(Restaurant restaurant){
+    public void addRestaurant(Restaurant restaurant) {
         this.restaurants.add(restaurant);
     }
 
