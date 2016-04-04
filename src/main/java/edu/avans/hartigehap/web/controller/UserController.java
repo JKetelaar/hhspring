@@ -1,8 +1,6 @@
 package edu.avans.hartigehap.web.controller;
 
-import edu.avans.hartigehap.domain.Bill;
-import edu.avans.hartigehap.domain.Order;
-import edu.avans.hartigehap.domain.Restaurant;
+import edu.avans.hartigehap.domain.*;
 import edu.avans.hartigehap.repository.UserRepository;
 import edu.avans.hartigehap.repository.UserRoleRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +35,14 @@ public class UserController {
     public String editProfile( Model uiModel ) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        auth.getName();
+        User user = userRepository.findByUsername(auth.getName());
+
+        if (user == null){
+            return "errors/404";
+        }
+
+        uiModel.addAttribute("user", user);
+        uiModel.addAttribute("types", NotificationAdapter.Type.values());
 
         return "hartigehap/profile";
     }

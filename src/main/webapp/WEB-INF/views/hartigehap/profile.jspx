@@ -3,41 +3,41 @@
      xmlns:c="http://java.sun.com/jsp/jstl/core"
      xmlns:spring="http://www.springframework.org/tags"
      xmlns:form="http://www.springframework.org/tags/form"
-     xmlns:sec="http://www.springframework.org/security/tags"
      version="2.0">
 
     <!-- Add elvariables to help our IDE for code completion -->
-    <!--@elvariable id="customer" type="edu.avans.hartigehap.domain.Customer"-->
-    <!--@elvariable id="restaurant" type="edu.avans.hartigehap.domain.Restaurant"-->
+    <!--@elvariable id="user" type="edu.avans.hartigehap.domain.User"-->
 
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <spring:message code="label_restaurant" var="labelRestaurant"/>
-    <spring:message code="label_customer_subsystem" var="labelCustomerSubsystem"/>
+    <spring:message code="label_edit_profile" var="labelEditProfile"/>
     <spring:message code="label_customer_update" var="labelCustomerUpdate"/>
     <spring:message code="text_clear" var="textClear"/>
     <spring:message code="text_save" var="textSave"/>
     <spring:message code="text_browse" var="textBrowse"/>
     <spring:message code="text_reset" var="textReset"/>
     <spring:message code="edit_profile" var="editProfile"/>
-    <spring:url value="/restaurants/${restaurant.id}" var="showRestaurant"/>
+    <spring:message code="label_username" var="labelUsername"/>
+    <spring:message code="label_password" var="labelPassword"/>
+    <spring:message code="label_roles" var="labelRoles"/>
+    <spring:message code="label_phone" var="labelPhone"/>
+    <spring:message code="label_email" var="labelEmail"/>
+    <spring:message code="label_notification_type" var="labelType"/>
 
     <div class="row">
-        <h1>${labelCustomerSubsystem}</h1>
-        <h2 class="restaurant muted">${labelRestaurant} <a href="${showRestaurant}">${restaurant.id}</a></h2>
+        <h1>${labelEditProfile}</h1>
 
         <c:if test="${not empty message}">
             <div id="message" class="alert alert-info ${message.type}">${message.message}</div>
         </c:if>
     </div>
 
-    <form:form modelAttribute="customer" id="customerUpdateForm" enctype="multipart/form-data"
-               method="${customer.id==null ? 'post':'put'}">
+    <form:form modelAttribute="user" id="profileUpdateForm" enctype="multipart/form-data" method="post">
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">${formTitle}</h3>
-                    <sec:authorize access="hasRole('ROLE_EMPLOYEE')">
+                    <h3 class="panel-title">${editProfile}</h3>
 					<span class="pull-right" style="height: 10px;">
 						<ul class="nav panel-tabs">
                             <li>
@@ -48,73 +48,83 @@
                             </li>
                         </ul>
 					</span>
-                    </sec:authorize>
                 </div>
                 <div class="panel-body">
                     <div class="input-group input-group-100">
-                        <span class="input-group-addon input-group-min-width" id="firstName"
-                              path="firstName">${labelCustomerFirstName}</span>
-                        <form:input path="firstName" class="form-control capitalise"
-                                    placeholder="${labelCustomerFirstName}" aria-describedby="firstName"/>
+                        <span class="input-group-addon input-group-min-width" id="username"
+                              path="username">${labelUsername}</span>
+                        <form:input path="username" class="form-control capitalise"
+                                    placeholder="${labelUsername}" aria-describedby="username"/>
                         <div>
-                            <form:errors path="firstName" cssClass="error"/>
+                            <form:errors path="username" cssClass="error"/>
                         </div>
                     </div>
 
                     <p/>
 
                     <div class="input-group input-group-100">
-                        <span class="input-group-addon input-group-min-width" id="lastName"
-                              path="lastName">${labelCustomerLastName}</span>
-                        <form:input path="lastName" class="form-control capitalise"
-                                    placeholder="${labelCustomerLastName}" aria-describedby="lastName"/>
+                        <span class="input-group-addon input-group-min-width" id="password"
+                              path="password">${labelPassword}</span>
+                        <form:input path="password" class="form-control capitalise"
+                                    placeholder="${labelPassword}" aria-describedby="password" type="password"/>
                         <div>
-                            <form:errors path="lastName" cssClass="error"/>
+                            <form:errors path="password" cssClass="error"/>
                         </div>
                     </div>
 
                     <p/>
 
                     <div class="input-group input-group-100">
-                        <span class="input-group-addon input-group-min-width" id="birthDate"
-                              path="birthDate">${labelCustomerBirthDate}</span>
-                        <form:input path="birthDate" class="form-control capitalise"
-                                    placeholder="${labelCustomerBirthDate}" aria-describedby="birthDate"
-                                    data-provide="datepicker" data-date-format="yyyy-mm-dd" readonly="true"/>
+                        <span class="input-group-addon input-group-min-width" id="roles"
+                              path="roles">${labelRoles}</span>
+                        <c:forEach items="${user.roles}" var="role">
+                            <form:input path="roles" class="form-control capitalise" value="${role.role}"
+                                        aria-describedby="roles" disabled="true"/>
+                        </c:forEach>
                         <div>
-                            <form:errors path="birthDate" cssClass="error"/>
+                            <form:errors path="roles" cssClass="error"/>
                         </div>
                     </div>
 
                     <p/>
 
                     <div class="input-group input-group-100">
-                        <span class="input-group-addon input-group-min-width" id="description"
-                              path="description">${labelCustomerDescription}</span>
-                        <form:textarea cols="60" rows="8" path="description" class="form-control custom-control"
-                                       id="customerDescription"/>
+                        <span class="input-group-addon input-group-min-width" id="phone"
+                              path="phone">${labelPhone}</span>
+                        <form:input path="phone" class="form-control capitalise"
+                                    placeholder="${labelPhone}" aria-describedby="phone"/>
                         <div>
-                            <form:errors path="description" cssClass="error"/>
+                            <form:errors path="phone" cssClass="error"/>
                         </div>
                     </div>
 
                     <p/>
 
-                    <div class="input-group input-group-100 image-preview">
-                        <span class="input-group-addon input-group-min-width" id="description"
-                              path="description">${labelCustomerPhoto}</span>
-                        <input type="text" class="form-control image-preview-filename" disabled="disabled"/>
-						<span class="input-group-btn">
-							<button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-                                <span class="glyphicon glyphicon-remove glyphicon-padding-right"><jsp:text/></span> ${textClear}
-                            </button>
-							<div class="btn btn-default image-preview-input">
-                                <span class="glyphicon glyphicon-folder-open glyphicon-padding-right"><jsp:text/></span>
-                                <span class="image-preview-input-title"> ${textBrowse}</span>
-                                <input type="file" accept="image/png, image/jpeg, image/gif" name="file"/>
-                            </div>
-						</span>
+                    <div class="input-group input-group-100">
+                        <span class="input-group-addon input-group-min-width" id="email"
+                              path="email">${labelEmail}</span>
+                        <form:input path="email" class="form-control capitalise"
+                                    placeholder="${labelEmail}" aria-describedby="email"/>
+                        <div>
+                            <form:errors path="email" cssClass="error"/>
+                        </div>
                     </div>
+
+                    <p/>
+
+                    <div class="input-group input-group-100">
+                        <span class="input-group-addon input-group-min-width" id="type"
+                              path="type">${labelType}</span>
+                        <form:select path="type" class="form-control">
+                            <form:options items="${types}" itemValue="name" itemLabel="name" />
+                        </form:select>
+                        <div>
+                            <form:errors path="type" cssClass="error"/>
+                        </div>
+                    </div>
+
+                    <p/>
+
                 </div>
             </div>
         </div>
