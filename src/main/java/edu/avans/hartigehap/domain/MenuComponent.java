@@ -1,7 +1,7 @@
 package edu.avans.hartigehap.domain;
 
 /**
- * @author thom145
+ * @author thom145, JKetelaar
  */
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -17,7 +17,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity()
 @Table(name = "MENUCOMPONENT")
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id")
@@ -25,18 +24,23 @@ import java.util.List;
 @Setter
 @ToString(callSuper = true, includeFieldNames = true, of = {})
 @NoArgsConstructor
-/*
-MenuComponent represents the interface for
-both MenuItem and PredifinedMenu. This method is abstract because
-we want to provide default implementations for these methods
-*/
+
+/**
+ * MenuComponent represents the interface for
+ * both MenuItem and PredefinedMenu. This method is abstract because
+ * we want to provide default implementations for these methods
+ */
 public abstract class MenuComponent extends DomainObjectNaturalId {
     private static final long serialVersionUID = 1L;
+
     @OneToMany(mappedBy = "parent", targetEntity = MenuComponent.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     protected List<MenuComponent> menuComponents = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private MenuComponent parent;
+
+    private int price;
 
     public void add(MenuComponent menuComponent) {
         throw new UnsupportedOperationException();
@@ -48,6 +52,7 @@ public abstract class MenuComponent extends DomainObjectNaturalId {
 
     public abstract void print(int depth);
 
+    // Imagine putting this in the database...
     @Transient()
     public boolean isRoot() {
         return (parent == null);

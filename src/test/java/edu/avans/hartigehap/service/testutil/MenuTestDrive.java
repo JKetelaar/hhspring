@@ -7,41 +7,41 @@ import edu.avans.hartigehap.domain.*;
  */
 public class MenuTestDrive {
 
-    public static void main(String[] args) {
-        MenuComponent allMenus = new PredefinedMenu("Alle menu's", "Alle menu's");
-        MenuComponent hamburger = new PredefinedMenu("Hamburger menu", "Great hamburger for breakfast");
-
-        MenuItem hamburgerItem = new Meal("Hamburger", "NietTeVinden.png", 3, "easy");
-        MenuItem hamburgerBun = new Meal("HamburgerBuns", "Gevonden.png", 3, "hard");
-        MenuItem lettuce = new Meal("Lettuce", "mooi.png", 3, "easy");
-        MenuItem cheese = new Meal("Chees", "OokNietTeVinden.png", 1, "easy");
-        MenuItem cheddarCheese = new Meal("Cheddar Cheese", "WatIsTest.wav", 1, "easy");
-        MenuItem patty = new Meal("Patty", "Hoi.wav", 1, "easy");
-        MenuItem bacon = new Meal("Bacon", "hmBacon.png", 1, "easy");
-        MenuItem ketchup = new Meal("Ketchup", "Hoi.wav", 1, "hard");
-        MenuItem americanCheese = new Meal("American Cheese", "WatIsTestTwee.wav", 1, "easy");
-        MenuItem cokeItem = new Drink("Cola", "WaarIsDeze.jpg", 2, Drink.Size.LARGE);
-        MenuItem francefrice = new Meal("France frice", "hoi.png", 1, "hard");
-
-
-        cheese.add(cheddarCheese);
-        cheese.add(cheddarCheese);
-        cheese.add(americanCheese);
-
-        hamburgerItem.add(hamburgerBun);
-        hamburgerItem.add(patty);
-        hamburgerItem.add(cheese);
-        hamburgerItem.add(bacon);
-        hamburgerItem.add(ketchup);
-        hamburgerItem.add(lettuce);
-        hamburger.add(cokeItem);
-        hamburger.add(hamburgerItem);
-        hamburger.add(francefrice);
-
-        allMenus.add(hamburger);
-
-        allMenus.print(1);
-    }
+//    public static void main(String[] args) {
+//        MenuComponent allMenus = new PredefinedMenu("Alle menu's", "Alle menu's");
+//        MenuComponent hamburger = new PredefinedMenu("Hamburger menu", "Great hamburger for breakfast");
+//
+//        MenuItem hamburgerItem = new Meal("Hamburger", "NietTeVinden.png", 3, "easy");
+//        MenuItem hamburgerBun = new Meal("HamburgerBuns", "Gevonden.png", 3, "hard");
+//        MenuItem lettuce = new Meal("Lettuce", "mooi.png", 3, "easy");
+//        MenuItem cheese = new Meal("Chees", "OokNietTeVinden.png", 1, "easy");
+//        MenuItem cheddarCheese = new Meal("Cheddar Cheese", "WatIsTest.wav", 1, "easy");
+//        MenuItem patty = new Meal("Patty", "Hoi.wav", 1, "easy");
+//        MenuItem bacon = new Meal("Bacon", "hmBacon.png", 1, "easy");
+//        MenuItem ketchup = new Meal("Ketchup", "Hoi.wav", 1, "hard");
+//        MenuItem americanCheese = new Meal("American Cheese", "WatIsTestTwee.wav", 1, "easy");
+//        MenuItem cokeItem = new Drink("Cola", "WaarIsDeze.jpg", 2, Drink.Size.LARGE);
+//        MenuItem francefrice = new Meal("France frice", "hoi.png", 1, "hard");
+//
+//
+//        cheese.add(cheddarCheese);
+//        cheese.add(cheddarCheese);
+//        cheese.add(americanCheese);
+//
+//        hamburgerItem.add(hamburgerBun);
+//        hamburgerItem.add(patty);
+//        hamburgerItem.add(cheese);
+//        hamburgerItem.add(bacon);
+//        hamburgerItem.add(ketchup);
+//        hamburgerItem.add(lettuce);
+//        hamburger.add(cokeItem);
+//        hamburger.add(hamburgerItem);
+//        hamburger.add(francefrice);
+//
+//        allMenus.add(hamburger);
+//
+//        allMenus.print(1);
+//    }
 
 //    public static void main(String args[]) {
 //        MenuComponent pancakeHouseMenu =

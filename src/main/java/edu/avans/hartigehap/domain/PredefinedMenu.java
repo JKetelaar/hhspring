@@ -15,7 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 @Entity
@@ -38,8 +41,12 @@ public class PredefinedMenu extends MenuComponent {
     @Column(name = "DESCRIPTION")
     String description;
 
-    public PredefinedMenu(String id, String description) {
+    @ManyToMany
+    private Collection<Restaurant> restaurants = new ArrayList<>();
+
+    public PredefinedMenu(String id, int price, String description) {
         super.setId(id);
+        super.setPrice(price);
         this.description = description;
     }
 
@@ -71,5 +78,14 @@ public class PredefinedMenu extends MenuComponent {
             MenuComponent menuComponent = (MenuComponent) iterator.next();
             menuComponent.print(depth);
         }
+    }
+
+    public void addRestaurant(Restaurant restaurant){
+        this.restaurants.add(restaurant);
+    }
+
+    @Override
+    public int getPrice() {
+        return super.getPrice();
     }
 }

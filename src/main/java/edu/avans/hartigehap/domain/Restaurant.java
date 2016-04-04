@@ -8,10 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Erco
@@ -34,6 +31,9 @@ public class Restaurant extends DomainObjectNaturalId {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "restaurant")
     private Collection<DiningTable> diningTables = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "restaurants")
+    private Collection<PredefinedMenu> predefinedMenus = new ArrayList<>();
 
     // no cascading
     @ManyToMany(mappedBy = "restaurants")

@@ -1,11 +1,9 @@
 package edu.avans.hartigehap.service.impl;
 
 import com.google.common.collect.Lists;
-import edu.avans.hartigehap.domain.DiningTable;
-import edu.avans.hartigehap.domain.EmptyBillException;
-import edu.avans.hartigehap.domain.MenuItem;
-import edu.avans.hartigehap.domain.StateException;
+import edu.avans.hartigehap.domain.*;
 import edu.avans.hartigehap.repository.DiningTableRepository;
+import edu.avans.hartigehap.repository.MenuComponentRepository;
 import edu.avans.hartigehap.repository.MenuItemRepository;
 import edu.avans.hartigehap.service.DiningTableService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +26,7 @@ public class DiningTableServiceImpl implements DiningTableService {
     @Autowired
     private DiningTableRepository diningTableRepository;
     @Autowired
-    private MenuItemRepository menuItemRepository;
+    private MenuComponentRepository menuComponentRepository;
 
     @Transactional(readOnly = true)
     public List<DiningTable> findAll() {
@@ -74,12 +72,12 @@ public class DiningTableServiceImpl implements DiningTableService {
     }
 
     public void addOrderItem(DiningTable diningTable, String menuItemName) {
-        MenuItem menuItem = menuItemRepository.findOne(menuItemName);
+        MenuComponent menuItem = menuComponentRepository.findOne(menuItemName);
         diningTable.getCurrentBill().getCurrentOrder().addOrderItem(menuItem);
     }
 
     public void deleteOrderItem(DiningTable diningTable, String menuItemName) {
-        MenuItem menuItem = menuItemRepository.findOne(menuItemName);
+        MenuComponent menuItem = menuComponentRepository.findOne(menuItemName);
         diningTable.getCurrentBill().getCurrentOrder().deleteOrderItem(menuItem);
     }
 
@@ -95,10 +93,10 @@ public class DiningTableServiceImpl implements DiningTableService {
     }
 
     private void menuItemWarmup() {
-        Iterator<MenuItem> menuItemIterator = menuItemRepository.findAll().iterator();
+        Iterator<MenuComponent> menuItemIterator = menuComponentRepository.findAll().iterator();
         while (menuItemIterator.hasNext()) {
-            MenuItem menuItem = menuItemIterator.next();
-            log.debug(menuItem.getId());
+            MenuComponent menuComponent = menuItemIterator.next();
+            log.debug(menuComponent.getId());
         }
     }
 }

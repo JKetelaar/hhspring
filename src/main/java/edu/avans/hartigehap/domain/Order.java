@@ -60,7 +60,7 @@ public class Order extends DomainObject {
         return orderItems.isEmpty();
     }
 
-    public void addOrderItem(MenuItem menuItem) {
+    public void addOrderItem(MenuComponent menuItem) {
         Iterator<OrderItem> orderItemIterator = orderItems.iterator();
         boolean found = false;
         while (orderItemIterator.hasNext()) {
@@ -77,7 +77,7 @@ public class Order extends DomainObject {
         }
     }
 
-    public void deleteOrderItem(MenuItem menuItem) {
+    public void deleteOrderItem(MenuComponent menuItem) {
         Iterator<OrderItem> orderItemIterator = orderItems.iterator();
         boolean found = false;
         while (orderItemIterator.hasNext()) {

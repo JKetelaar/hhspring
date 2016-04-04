@@ -24,8 +24,6 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     @Autowired
     private FoodCategoryRepository foodCategoryRepository;
     @Autowired
-    private MenuItemRepository menuItemRepository;
-    @Autowired
     private CustomerRepository customerRepository;
     @Autowired
     private UserRoleRepository userRoleRepository;
@@ -40,9 +38,10 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
     private List<Customer> customers = new ArrayList<>();
     private List<UserRole> userRoles = new ArrayList<>();
     private List<User> users = new ArrayList<>();
+    private List<PredefinedMenu> predefinedMenus = new ArrayList<>();
 
     private void createPredefinedMenu() {
-        PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", "Great pancakes for breakfast");
+        PredefinedMenu pancakeMenu = new PredefinedMenu("Pancake menu", 10, "Great pancakes for breakfast");
         pancakeMenu = menuComponentRepository.save(pancakeMenu);
 
         MenuItem pancakeItem = new Meal("Pancake", "pancake.jpg", 3, "easy");
@@ -55,6 +54,8 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
 
         pancakeMenu.add(pancakeItem);
         pancakeMenu.add(colaItem);
+
+        predefinedMenus.add(pancakeMenu);
     }
 
     /**
@@ -129,20 +130,20 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
         // like "object references an unsaved transient instance - save the
         // transient instance before flushing:"
         meal.addFoodCategories(foodCats);
-        meal = menuItemRepository.save(meal);
+        meal = menuComponentRepository.save(meal);
         meals.add(meal);
     }
 
     private void createDrink(String name, String image, int price, Drink.Size size, List<FoodCategory> foodCats) {
         Drink drink = new Drink(name, image, price, size);
-        drink = menuItemRepository.save(drink);
+        drink = menuComponentRepository.save(drink);
         drink.addFoodCategories(foodCats);
         drinks.add(drink);
     }
 
     private void createCondimentedDrink(String name, String image, int price, Drink drink) {
         MenuItemDecorator condimentDrink = new Condiment(drink, name, image, price);
-        condimentDrink = menuItemRepository.save(condimentDrink);
+        condimentDrink = menuComponentRepository.save(condimentDrink);
         drink.add(condimentDrink);
         condimentDrink.addFoodCategories(drink.getFoodCategories());
     }
@@ -212,7 +213,11 @@ public class RestaurantPopulatorServiceImpl implements RestaurantPopulatorServic
             restaurant.getMenu().getDrinks().add(drink);
         }
 
-//        createCondimentedDrink("Coffee with sugar", "coffee.jpg", 2, drinks.get(1));
+        // Manipulating the predefined menus to add them to the restaurants
+        for (PredefinedMenu predefinedMenu : predefinedMenus){
+            predefinedMenu.addRestaurant(restaurant);
+            restaurant.getPredefinedMenus().add(predefinedMenu);
+        }
 
         // for the moment, every customer has dined in every restaurant
         // no cascading between customer and restaurant; therefore both
