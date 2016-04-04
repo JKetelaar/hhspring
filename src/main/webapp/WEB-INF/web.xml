@@ -98,4 +98,11 @@
         <location>/404</location>
     </error-page>
 
+    <!--<jsp-config>-->
+        <!--<taglib>-->
+            <!--<taglib-uri></taglib-uri>-->
+            <!--<taglib-location></taglib-location>-->
+        <!--</taglib>-->
+    <!--</jsp-config>-->
+
 </web-app>
