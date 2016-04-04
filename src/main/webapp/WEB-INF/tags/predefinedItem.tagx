@@ -1,0 +1,17 @@
+<!--
+  Author: JKetelaar
+
+  Description: Isn't this a great system to loop recursively
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:custom="urn:jsptagdir:/WEB-INF/tags">
+    <jsp:directive.attribute name="components" required="true" type="java.util.List"/>
+    <jsp:directive.attribute name="depth" required="true" type="java.lang.Integer"/>
+        <c:forEach items="${components}" var="component">
+
+            <span style="margin-left: ${depth * 7}px; margin-top: -12px;">-<c:out value="${component.id}"/></span>
+            <br/>
+                <custom:predefinedItem components="${component.menuComponents}" depth="${depth + 1}"/>
+        </c:forEach>
+</jsp:root>

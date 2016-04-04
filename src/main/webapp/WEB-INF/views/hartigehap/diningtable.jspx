@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div id="body" xmlns:jsp="http://java.sun.com/JSP/Page"
-     xmlns:c="http://java.sun.com/jsp/jstl/core"
-     xmlns:spring="http://www.springframework.org/tags"
-     xmlns:form="http://www.springframework.org/tags/form"
-     version="2.0">
+	 xmlns:c="http://java.sun.com/jsp/jstl/core"
+	 xmlns:spring="http://www.springframework.org/tags"
+	 xmlns:form="http://www.springframework.org/tags/form"
+	 version="2.0"
+     xmlns:custom="urn:jsptagdir:/WEB-INF/tags">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
@@ -27,6 +28,7 @@
     <spring:message code="label_welcome_word" var="labelWelcomeWord"/>
     <spring:message code="label_pick_from_menu" var="labelPickFromMenu"/>
     <spring:message code="table_item" var="tableItem"/>
+    <spring:message code="menu_items" var="menuItems"/>
     <spring:message code="table_image" var="tableImage"/>
     <spring:message code="table_price" var="tablePrice"/>
     <spring:message code="table_actions" var="tableActions"/>
@@ -212,7 +214,7 @@
                             <thead>
                             <tr>
                                 <th>${tableItem}</th>
-                                <th>${tableImage}</th>
+                                <th>${menuItems}</th>
                                 <th>${tablePrice}</th>
                                 <th>${tableActions}</th>
                             </tr>
@@ -223,7 +225,11 @@
                                 <c:forEach items="${restaurant.predefinedMenus}" var="predefinedMenu">
                                     <tr>
                                         <td class="capitalise">${predefinedMenu.id}</td>
-                                        <td><img id="menuitemimg" src="${imageUrl}" width="150px"/></td>
+                                        <c:if test="${not empty predefinedMenu.menuComponents}">
+                                            <td>
+                                                <custom:predefinedItem components="${predefinedMenu.menuComponents}" depth="0" />
+                                            </td>
+                                        </c:if>
                                         <td>${labelCurrency} ${predefinedMenu.price}</td>
                                         <td>
                                             <spring:url var="addOrderItemUrl"

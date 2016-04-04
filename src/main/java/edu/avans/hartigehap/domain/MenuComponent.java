@@ -62,4 +62,9 @@ public abstract class MenuComponent extends DomainObjectNaturalId {
     public void setParent(MenuComponent parent) {
         this.parent = parent;
     }
+
+    @Override
+    public String getId() {
+        return super.getId();
+    }
 }
