@@ -33,7 +33,7 @@
         </c:if>
     </div>
 
-    <form:form modelAttribute="user" id="profileUpdateForm" enctype="multipart/form-data" method="post">
+    <form:form modelAttribute="user" id="profileUpdateForm" enctype="multipart/form-data" method="put">
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -116,7 +116,7 @@
                         <span class="input-group-addon input-group-min-width" id="type"
                               path="type">${labelType}</span>
                         <form:select path="type" class="form-control">
-                            <form:options items="${types}" itemValue="name" itemLabel="name"/>
+                            <form:options items="${types}" itemValue="name" itemLabel="name" selected="${user.type.name}"/>
                         </form:select>
                         <div>
                             <form:errors path="type" cssClass="error"/>
