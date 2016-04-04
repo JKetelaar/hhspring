@@ -1,7 +1,5 @@
 package edu.avans.hartigehap.service.testutil;
 
-import edu.avans.hartigehap.domain.*;
-
 /**
  * @author thom145
  */

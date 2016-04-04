@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:form="http://www.springframework.org/tags/form"
+     version="2.0">
+
+    <!-- Add elvariables to help our IDE for code completion -->
+    <!--@elvariable id="user" type="edu.avans.hartigehap.domain.User"-->
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <spring:message code="label_restaurant" var="labelRestaurant"/>
+    <spring:message code="label_edit_profile" var="labelEditProfile"/>
+    <spring:message code="label_customer_update" var="labelCustomerUpdate"/>
+    <spring:message code="text_clear" var="textClear"/>
+    <spring:message code="text_save" var="textSave"/>
+    <spring:message code="text_browse" var="textBrowse"/>
+    <spring:message code="text_reset" var="textReset"/>
+    <spring:message code="edit_profile" var="editProfile"/>
+    <spring:message code="label_username" var="labelUsername"/>
+    <spring:message code="label_password" var="labelPassword"/>
+    <spring:message code="label_roles" var="labelRoles"/>
+    <spring:message code="label_phone" var="labelPhone"/>
+    <spring:message code="label_email" var="labelEmail"/>
+    <spring:message code="label_notification_type" var="labelType"/>
+
+    <div class="row">
+        <h1>${labelEditProfile}</h1>
+
+        <c:if test="${not empty message}">
+            <div id="message" class="alert alert-info ${message.type}">${message.message}</div>
+        </c:if>
+    </div>
+
+    <form:form modelAttribute="user" id="profileUpdateForm" enctype="multipart/form-data" method="put">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">${editProfile}</h3>
+					<span class="pull-right" style="height: 10px;">
+						<ul class="nav panel-tabs">
+                            <li>
+                                <button type="submit" class="btn btn-success">${textSave}</button>
+                            </li>
+                            <li>
+                                <button type="reset" class="btn btn-warning">${textReset}</button>
+                            </li>
+                        </ul>
+					</span>
+                </div>
+                <div class="panel-body">
+                    <div class="input-group input-group-100">
+                        <span class="input-group-addon input-group-min-width" id="username"
+                              path="username">${labelUsername}</span>
+                        <form:input path="username" class="form-control capitalise"
+                                    placeholder="${labelUsername}" aria-describedby="username"/>
+                        <div>
+                            <form:errors path="username" cssClass="error"/>
+                        </div>
+                    </div>
+
+                    <p/>
+
+                    <div class="input-group input-group-100">
+                        <span class="input-group-addon input-group-min-width" id="password"
+                              path="password">${labelPassword}</span>
+                        <form:input path="password" class="form-control capitalise"
+                                    placeholder="${labelPassword}" aria-describedby="password" type="password"/>
+                        <div>
+                            <form:errors path="password" cssClass="error"/>
+                        </div>
+                    </div>
+
+                    <p/>
+
+                    <div class="input-group input-group-100">
+                        <span class="input-group-addon input-group-min-width" id="roles"
+                              path="roles">${labelRoles}</span>
+                        <c:forEach items="${user.roles}" var="role">
+                            <form:input path="roles" class="form-control capitalise" value="${role.role}"
+                                        aria-describedby="roles" disabled="true"/>
+                        </c:forEach>
+                        <div>
+                            <form:errors path="roles" cssClass="error"/>
+                        </div>
+                    </div>
+
+                    <p/>
+
+                    <div class="input-group input-group-100">
+                        <span class="input-group-addon input-group-min-width" id="phone"
+                              path="phone">${labelPhone}</span>
+                        <form:input path="phone" class="form-control capitalise"
+                                    placeholder="${labelPhone}" aria-describedby="phone"/>
+                        <div>
+                            <form:errors path="phone" cssClass="error"/>
+                        </div>
+                    </div>
+
+                    <p/>
+
+                    <div class="input-group input-group-100">
+                        <span class="input-group-addon input-group-min-width" id="email"
+                              path="email">${labelEmail}</span>
+                        <form:input path="email" class="form-control capitalise"
+                                    placeholder="${labelEmail}" aria-describedby="email"/>
+                        <div>
+                            <form:errors path="email" cssClass="error"/>
+                        </div>
+                    </div>
+
+                    <p/>
+
+                    <div class="input-group input-group-100">
+                        <span class="input-group-addon input-group-min-width" id="type"
+                              path="type">${labelType}</span>
+                        <form:select path="type" class="form-control">
+                            <form:options items="${types}" itemValue="name" itemLabel="name" selected="${user.type.name}"/>
+                        </form:select>
+                        <div>
+                            <form:errors path="type" cssClass="error"/>
+                        </div>
+                    </div>
+
+                    <p/>
+
+                </div>
+            </div>
+        </div>
+    </form:form>
+</div>

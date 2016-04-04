@@ -1,10 +1,12 @@
 package edu.avans.hartigehap.service.impl;
 
 import com.google.common.collect.Lists;
-import edu.avans.hartigehap.domain.*;
+import edu.avans.hartigehap.domain.DiningTable;
+import edu.avans.hartigehap.domain.EmptyBillException;
+import edu.avans.hartigehap.domain.MenuComponent;
+import edu.avans.hartigehap.domain.StateException;
 import edu.avans.hartigehap.repository.DiningTableRepository;
 import edu.avans.hartigehap.repository.MenuComponentRepository;
-import edu.avans.hartigehap.repository.MenuItemRepository;
 import edu.avans.hartigehap.service.DiningTableService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

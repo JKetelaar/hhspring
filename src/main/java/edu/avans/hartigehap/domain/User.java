@@ -52,10 +52,10 @@ public class User extends DomainObject {
         this.enabled = enabled;
     }
 
-    public void updateEditableFields(User customer) {
-        username = customer.username;
-        password = customer.password;
-        enabled = customer.enabled;
+    public void updateEditableFields(User user) {
+        username = user.username;
+        password = user.password;
+        enabled = user.enabled;
     }
 
     public void addProperty(String key, String value) {
